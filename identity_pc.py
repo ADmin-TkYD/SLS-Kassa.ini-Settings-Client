@@ -34,8 +34,9 @@ py_logger.debug(f"Loading module {__name__}...")
 for compatibility with older Windows 7 PCs, the dataclass(slots=true) parameter has been replaced with dataslots()
 '''
 # @dataclass(slots=True, frozen=True)
+
+
 @dataslots
-@dataclass(frozen=True)
 @dataclass(frozen=True)
 class IdentityPC:
     pc_name: str
