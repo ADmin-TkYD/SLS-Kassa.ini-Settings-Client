@@ -2,7 +2,9 @@
 
 **_Current version 1.5.1_**
 
+
 ## ChangeLog
+
 **version 1.5.1**
 
 Fixed problem with script autorun during user authorization, a relative path was specified instead of a full 
@@ -19,3 +21,14 @@ for compatibility.
 
 Исправлена проблема с dataclass(slots=True) в старых версиях Python для Windows 7, добавлены dataslots() 
 для совместимости.
+
+
+**version 1.3.0**
+
+Fixed problem with JSON errors in situations where JSON is not correct or the site did not return anything.
+
+The logger settings are moved to a separate file.
+
+Исправлена проблема с ошибками ДЖСОН, в ситуациях, если ДЖСОН не корректен или сайт не вернул ни чего.
+
+Настройки логгера вынесены в отдельный файл.
