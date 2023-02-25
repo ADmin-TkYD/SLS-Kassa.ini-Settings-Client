@@ -6,6 +6,7 @@ from text_hash import getHash
 from exceptions import CantGetIdentityPC, CantGetJsonFromServer
 from connect_to_server import srv_request
 from getmac import get_mac_address as gma
+from run_with_logon import set_run_script
 from set_logger_settings import *
 
 
@@ -14,6 +15,10 @@ py_logger.debug(f"Loading module {__name__}...")
 def main():
     version = '1.3.0'
     print(f'Version: {version}{ln()}')
+
+    # adding to autostart at user login
+    set_run_script()
+
     try:
         identity_pc = get_identity_pc()
         py_logger.debug(f"{identity_pc}")
