@@ -1,3 +1,4 @@
+from dataslots import dataslots
 from dataclasses import dataclass
 import platform
 import re
@@ -29,7 +30,14 @@ elif config.LOGGER_LEVEL == "debug":
 py_logger.debug(f"Loading module {__name__}...")
 
 
-@dataclass(slots=True, frozen=True)
+'''
+for compatibility with older Windows 7 PCs, the dataclass(slots=true) parameter has been replaced with dataslots()
+'''
+# @dataclass(slots=True, frozen=True)
+
+
+@dataslots
+@dataclass(frozen=True)
 class IdentityPC:
     pc_name: str
     city_abbr: str
