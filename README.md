@@ -5,6 +5,13 @@
 
 ## ChangeLog
 
+**version 1.5.2**
+
+Launch mode changed to hidden.
+
+Режим запуска изменен на скрытый.
+
+
 **version 1.5.1**
 
 Fixed problem with script autorun during user authorization, a relative path was specified instead of a full 
