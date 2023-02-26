@@ -14,7 +14,7 @@ py_logger.debug(f"Loading module {__name__}...")
 
 
 def main():
-    version = '1.5.1'
+    version = '1.5.2'
     print(f'Version: {version}{ln()}')
 
     # adding to autostart at user login
