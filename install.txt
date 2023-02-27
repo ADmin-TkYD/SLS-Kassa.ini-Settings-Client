@@ -1,0 +1,21 @@
+https://www.python.org/ftp/python/3.11.2/python-3.11.2-amd64.exe
+
+winget install --id Git.Git -e --source winget
+
+cmd
+cd "C:\SoftLand Systems"
+mkdir SLS-Scripts
+cd SLS-Scripts
+git clone https://github.com/ADmin-TkYD/SLS-Kassa.ini-Settings-Client.git
+cd SLS-Kassa.ini-Settings-Client
+python -m venv venv
+
+
+cd "C:\SoftLand Systems\SLS-Scripts\SLS-Kassa.ini-Settings-Client"
+python.exe -m pip install --upgrade pip
+venv\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install -r requirements.txt
+
+python main.py
+

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3.10
 
 from identity_pc import get_identity_pc
-from work_with_config import config_ini
-from text_hash import getHash
+from work_with_config import ConfigIni
+from text_hash import GetHash
 from exceptions import CantGetIdentityPC, CantGetJsonFromServer
 from connect_to_server import srv_request
 from getmac import get_mac_address as gma
@@ -14,7 +14,7 @@ py_logger.debug(f"Loading module {__name__}...")
 
 
 def main():
-    version = '1.5.2'
+    version = '1.5.3'
     print(f'Version: {version}{ln()}')
 
     # adding to autostart at user login
@@ -30,13 +30,13 @@ def main():
     print(f"City: {identity_pc.city_abbr}")
     print(f"Shop Number: {identity_pc.shop_number}{ln()}")
 
-    hash_hostname = getHash(identity_pc.pc_name.upper())
+    hash_hostname = GetHash(identity_pc.pc_name.upper())
     if DEBUG:
         print(f"HostName: {identity_pc.pc_name}")
         print(f"Hash HostName: {hash_hostname.MD5}{ln()}")
 
     pc_mac_address = gma()
-    hash_mac = getHash(pc_mac_address.upper())
+    hash_mac = GetHash(pc_mac_address.upper())
     if DEBUG:
         print(f"MAC Address: {pc_mac_address}")
         print(f"Hash MAC Address: {hash_mac.MD5}{ln()}")
@@ -54,7 +54,7 @@ def main():
     if DEBUG:
         print(f"Request from Server: {req_data['DTCLogin']}{ln()}")
 
-    data_ini_conf = config_ini(config.SLSKASSA_CONFIG)
+    data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
     data_ini_conf.set_params(ini_section, req_data)
 
 

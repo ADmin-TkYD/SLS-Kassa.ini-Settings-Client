@@ -1,9 +1,33 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.1_**
+**_Current version 1.5.3_**
 
+
+## ToDo
+
+Add notification to TG about parameter upgrade if parameters do not match.
+
+Add protection for transmitted data.
+
+Find a problem with POST requests on the server.
+
+---
+
+Добавить уведомление в TG об апгреде параметров, если параметры не совпадают.
+
+Добавить защиту передаваемых данных.
+
+Найти проблему с POST запросами на сервере.
+
+---
 
 ## ChangeLog
+
+**version 1.5.3**
+
+Added a check for the identity of the parameters, now the parameters are not overwritten if the data is identical.
+
+Добавлена проверка на идентичность параметров, теперь параметры не перезаписываются, если данные идентичны.
 
 **version 1.5.2**
 
