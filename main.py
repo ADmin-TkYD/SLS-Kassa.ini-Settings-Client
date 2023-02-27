@@ -1,8 +1,8 @@
 #!/usr/bin/env python3.10
 
 from identity_pc import get_identity_pc
-from work_with_config import config_ini
-from text_hash import getHash
+from work_with_config import ConfigIni
+from text_hash import GetHash
 from exceptions import CantGetIdentityPC, CantGetJsonFromServer
 from connect_to_server import srv_request
 from getmac import get_mac_address as gma
@@ -21,7 +21,10 @@ def main():
     add_to_registry()
 
     try:
-        identity_pc = get_identity_pc()
+        if DEBUG:
+            identity_pc = 'EKB-01-PC02-Acc'
+        else:
+            identity_pc = get_identity_pc()
         py_logger.debug(f"{identity_pc}")
     except CantGetIdentityPC:
         py_logger.error("CantGetIdentityPC")
@@ -30,13 +33,15 @@ def main():
     print(f"City: {identity_pc.city_abbr}")
     print(f"Shop Number: {identity_pc.shop_number}{ln()}")
 
-    hash_hostname = getHash(identity_pc.pc_name.upper())
+    hash_hostname = GetHash(identity_pc.pc_name.upper())
     if DEBUG:
         print(f"HostName: {identity_pc.pc_name}")
         print(f"Hash HostName: {hash_hostname.MD5}{ln()}")
 
     pc_mac_address = gma()
-    hash_mac = getHash(pc_mac_address.upper())
+    if DEBUG:
+        pc_mac_address = '74:27:EA:43:9F:84'
+    hash_mac = GetHash(pc_mac_address.upper())
     if DEBUG:
         print(f"MAC Address: {pc_mac_address}")
         print(f"Hash MAC Address: {hash_mac.MD5}{ln()}")
@@ -54,7 +59,7 @@ def main():
     if DEBUG:
         print(f"Request from Server: {req_data['DTCLogin']}{ln()}")
 
-    data_ini_conf = config_ini(config.SLSKASSA_CONFIG)
+    data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
     data_ini_conf.set_params(ini_section, req_data)
 
 

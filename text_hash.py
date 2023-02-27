@@ -4,7 +4,7 @@ from set_logger_settings import *
 py_logger.debug(f"Loading module {__name__}...")
 
 
-class getHash:
+class GetHash:
     def __init__(self, str2hash: str) -> None:
         # str2hash - initializing string
         self.MD5 = ''
@@ -23,4 +23,4 @@ class getHash:
 
 # for test this class:
 if __name__ == '__main__':
-    print(f"Empty parameter: {getHash('op, la-lay-la').MD5}")
+    print(f"Empty parameter: {GetHash('op, la-lay-la').MD5}")
