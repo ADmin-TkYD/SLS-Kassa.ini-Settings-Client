@@ -1,15 +1,19 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.3_**
+**_Current version 1.5.4_**
 
 
 ## ToDo
+
+---
 
 Add notification to TG about parameter upgrade if parameters do not match.
 
 Add protection for transmitted data.
 
 Find a problem with POST requests on the server.
+
+
 
 ---
 
@@ -23,11 +27,28 @@ Find a problem with POST requests on the server.
 
 ## ChangeLog
 
+---
+
+**version 1.5.4**
+
+Fixed error due to interpolation in configparser.
+
+**Error**: `raise ValueError("invalid interpolation syntax in %r at " 
+ValueError: invalid interpolation syntax in "abc%abcabc"`
+
+**Fixed**: `configparser.ConfigParser(interpolation=None)`
+
+Исправлена ошибка из-за интерполяции в configparser.
+
+---
+
 **version 1.5.3**
 
 Added a check for the identity of the parameters, now the parameters are not overwritten if the data is identical.
 
 Добавлена проверка на идентичность параметров, теперь параметры не перезаписываются, если данные идентичны.
+
+---
 
 **version 1.5.2**
 
@@ -35,6 +56,7 @@ Launch mode changed to hidden.
 
 Режим запуска изменен на скрытый.
 
+---
 
 **version 1.5.1**
 
@@ -44,6 +66,7 @@ path to the logs folder, which caused an error if the working folder was not the
 Исправлена проблема с автозапуском скрипта при авторизации пользователя, был указан относительный путь вместо 
 полного к папке логов, что вызывало ошибку, если рабочая папка не была папкой скрипта.
 
+---
 
 **version 1.4.1**
 
@@ -53,6 +76,7 @@ for compatibility.
 Исправлена проблема с dataclass(slots=True) в старых версиях Python для Windows 7, добавлены dataslots() 
 для совместимости.
 
+---
 
 **version 1.3.0**
 
@@ -63,3 +87,5 @@ The logger settings are moved to a separate file.
 Исправлена проблема с ошибками ДЖСОН, в ситуациях, если ДЖСОН не корректен или сайт не вернул ни чего.
 
 Настройки логгера вынесены в отдельный файл.
+
+---

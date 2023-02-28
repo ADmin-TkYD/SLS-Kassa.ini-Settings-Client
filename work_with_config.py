@@ -9,7 +9,7 @@ class ConfigIni:
     def __init__(self, cfg_path: str) -> None:
         self._cfg_path = cfg_path
         # обращаемся к конфигу как к обычному словарю!
-        self.Config = configparser.ConfigParser()
+        self.Config = configparser.ConfigParser(interpolation=None)
         # По умолчанию имя преобразуется в нижний регистр, данная настройка оставляет имена как есть
         self.Config.optionxform = lambda option: option
 
@@ -37,20 +37,23 @@ class ConfigIni:
 
 # for test this class:
 if __name__ == '__main__':
-    conf = 'test/config_test.ini'
+    conf = 'test/Kassa_W.ini'
     ini_section = 'Kassa'
-    test_write_conf = ConfigIni(conf)
-    test_write_conf.set_params(ini_section,
-                         {
-                             'DiscontFindByTel': '1',
-                             'DTCUse': '1',
-                             'DTCCheck': '1',
-                             'DTCDo': '2',
-                             'DTCMaxBon': '10 00',
-                             'DTCSender': 'BRAVISSIMO'
-                         })
-    test_read_conf = ConfigIni(conf)
-    test_read_conf.get_config()
-    for param_key, param_value in test_read_conf.Config[ini_section].items():
+    test_conf = ConfigIni(conf)
+    test_conf.set_params(
+        ini_section,
+        {
+            'DiscontFindByTel': '1',
+            'DTCUse': '1',
+            'DTCCheck': '1',
+            'DTCDo': '2',
+            'DTCMaxBon': '10',
+            'DTCSender': 'BRAVISSIMO',
+            'DTCPassWord': '1%2345%6'
+        }
+    )
+    '''
+    for param_key, param_value in test_conf.Config[ini_section].items():
         print(f"{param_key}, {param_value}")
+    '''
 

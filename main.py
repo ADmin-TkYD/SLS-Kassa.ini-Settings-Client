@@ -14,7 +14,7 @@ py_logger.debug(f"Loading module {__name__}...")
 
 
 def main():
-    version = '1.5.3'
+    version = '1.5.4'
     print(f'Version: {version}{ln()}')
 
     # adding to autostart at user login
@@ -45,17 +45,54 @@ def main():
     ini_section = 'Kassa'
 
     try:
-        req_data = srv_request({'city': identity_pc.city_abbr, 'name': hash_hostname.MD5, 'mac': hash_mac.MD5})
+        req_data = srv_request(
+            {
+                'city': identity_pc.city_abbr,
+                'name': hash_hostname.MD5,
+                'mac': hash_mac.MD5,
+                'version': version,
+            }
+        )
     except CantGetJsonFromServer:
         py_logger.error("CantGetJsonFromServer")
         exit(f"Не удалось получить корректные данные от сервера, при запросе данных для: "
-             f"{{'city': {identity_pc.city_abbr}, 'name': {hash_hostname.MD5}, 'mac': {hash_mac.MD5}}}")
+             f"{{"
+             f"'city': {identity_pc.city_abbr}, "
+             f"'name': {hash_hostname.MD5}, "
+             f"'mac': {hash_mac.MD5}, "
+             f"'version': {version}, "
+             f"}}")
 
     if DEBUG:
         print(f"Request from Server: {req_data['DTCLogin']}{ln()}")
 
     data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
-    data_ini_conf.set_params(ini_section, req_data)
+    is_update = data_ini_conf.set_params(ini_section, req_data)
+
+    if is_update:
+        try:
+            req_data = srv_request(
+                {
+                    'city': identity_pc.city_abbr,
+                    'name': hash_hostname.MD5,
+                    'mac': hash_mac.MD5,
+                    'version': version,
+                    'update': is_update,
+                }
+            )
+        except CantGetJsonFromServer:
+            py_logger.error("CantGetJsonFromServer")
+            exit(f"Не удалось получить корректные данные от сервера, при запросе данных для: "
+                 f"{{"
+                 f"'city': {identity_pc.city_abbr}, "
+                 f"'name': {hash_hostname.MD5}, "
+                 f"'mac': {hash_mac.MD5}, "
+                 f"'version': {version}, "
+                 f"'update': {is_update}, "                    
+                 f"}}")
+
+        if DEBUG:
+            print(f"Request from Server: {req_data['DTCLogin']}{ln()}")
 
 
 if __name__ == '__main__':
