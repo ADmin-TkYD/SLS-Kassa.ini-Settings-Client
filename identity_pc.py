@@ -5,29 +5,7 @@ import re
 from exceptions import CantGetIdentityPC
 from set_logger_settings import *
 
-
-# получение пользовательского логгера
-py_logger = logging.getLogger(__name__)
-
-# настройка обработчика и форматировщика в соответствии с нашими нуждами
-py_handler = logging.FileHandler(f"{config.LOGGER_FILE}.log", mode='a')
-py_formatter = logging.Formatter(f"{config.LOGGER_FORMAT}")
-
-# добавление форматировщика к обработчику
-py_handler.setFormatter(py_formatter)
-# добавление обработчика к логгеру
-py_logger.addHandler(py_handler)
-
-# установка уровня логирования
-if config.LOGGER_LEVEL == "info":
-    py_logger.setLevel(logging.INFO)
-    py_logger.info(f"setLevel: logging.INFO")
-elif config.LOGGER_LEVEL == "debug":
-    py_logger.setLevel(logging.DEBUG)
-    py_logger.info(f"setLevel: logging.DEBUG")
-
-
-py_logger.debug(f"Loading module {__name__}...")
+py_logger.debug(f'Loading module {__name__}...')
 
 
 '''
@@ -84,9 +62,9 @@ def _parse_host_name(host_name: str) -> IdentityPC:
     find_result = re.match(r'(^[a-z]{3})(?:-(\d{2}))?-(pc|nb)(\d{2})-([a-z]{3}$)', host_name, re.I)
     if find_result is None:
         if __name__ == '__main__':
-            exit(f"Error: Elements of IdentityPC is not found in HostName: {host_name}")
+            exit(f'Error: Elements of IdentityPC is not found in HostName: {host_name}')
 
-        py_logger.exception(f"Error: Elements of IdentityPC is not found in HostName: {host_name}")
+        py_logger.exception(f'Error: Elements of IdentityPC is not found in HostName: {host_name}')
         raise CantGetIdentityPC
 
     identity_keys = {
@@ -99,18 +77,18 @@ def _parse_host_name(host_name: str) -> IdentityPC:
     }
 
     return IdentityPC(
-        pc_name=find_result.group(identity_keys["pc_name"]),
-        city_abbr=find_result.group(identity_keys["city_abbr"]),
-        shop_number=find_result.group(identity_keys["shop_number"])
-        if find_result.group(identity_keys["shop_number"])
-        is not None else "01",
-        pc_type=find_result.group(identity_keys["pc_type"]),
-        pc_number=find_result.group(identity_keys["pc_number"]),
-        department_abbr=find_result.group(identity_keys["department_abbr"]),
+        pc_name=find_result.group(identity_keys['pc_name']),
+        city_abbr=find_result.group(identity_keys['city_abbr']),
+        shop_number=find_result.group(identity_keys['shop_number'])
+        if find_result.group(identity_keys['shop_number'])
+        is not None else '01',
+        pc_type=find_result.group(identity_keys['pc_type']),
+        pc_number=find_result.group(identity_keys['pc_number']),
+        department_abbr=find_result.group(identity_keys['department_abbr']),
     )
 
 
 # for test this class:
 if __name__ == '__main__':
-    print(f"TST-01-NB10-Adm: {get_identity_pc('TST-01-NB10-Adm')}")
-    print(f"Empty parameter: {get_identity_pc()}")
+    print(f'TST-01-NB10-Adm: {get_identity_pc("TST-01-NB10-Adm")}')
+    print(f'Empty parameter: {get_identity_pc()}')

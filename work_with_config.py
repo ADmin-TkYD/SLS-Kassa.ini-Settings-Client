@@ -2,7 +2,7 @@ import configparser
 from set_logger_settings import *
 
 
-py_logger.debug(f"Loading module {__name__}...")
+py_logger.debug(f'Loading module {__name__}...')
 
 
 class ConfigIni:
@@ -37,7 +37,7 @@ class ConfigIni:
 
 # for test this class:
 if __name__ == '__main__':
-    conf = 'test/Kassa_W.ini'
+    conf = r'test\Kassa_W.ini'
     ini_section = 'Kassa'
     test_conf = ConfigIni(conf)
     test_conf.set_params(
@@ -54,6 +54,6 @@ if __name__ == '__main__':
     )
     '''
     for param_key, param_value in test_conf.Config[ini_section].items():
-        print(f"{param_key}, {param_value}")
+        print(f'{param_key}, {param_value}')
     '''
 

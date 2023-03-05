@@ -1,7 +1,7 @@
 import hashlib
 from set_logger_settings import *
 
-py_logger.debug(f"Loading module {__name__}...")
+py_logger.debug(f'Loading module {__name__}...')
 
 
 class GetHash:
@@ -10,7 +10,7 @@ class GetHash:
         self.MD5 = ''
         self._set_md5(str2hash)
 
-        py_logger.debug(f"String: {str2hash} => MD5: {self.MD5}")
+        py_logger.debug(f'String: {str2hash} => MD5: {self.MD5}')
 
     def _set_md5(self, str2hash: str) -> None:
         # encoding string using encode()
@@ -23,4 +23,4 @@ class GetHash:
 
 # for test this class:
 if __name__ == '__main__':
-    print(f"Empty parameter: {GetHash('op, la-lay-la').MD5}")
+    print(f'Empty parameter: {GetHash("op, la-lay-la").MD5}')

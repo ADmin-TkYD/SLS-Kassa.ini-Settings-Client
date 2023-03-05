@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.7_**
+**_Current version 1.5.8_**
 
 
 ## ToDo
@@ -28,6 +28,14 @@ Add handling of situations in case the parameter is missing in the ini-file.
 ---
 
 ## ChangeLog
+
+---
+
+**version 1.5.8** *for testing*
+
+Added script update module via **git**, using `git pool`.
+
+Добавлен модуль обновления скрипта через **git**, с помощью `git pool`.
 
 ---
 
