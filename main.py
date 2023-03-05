@@ -16,7 +16,7 @@ py_logger.debug(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.10'
+    version = '1.5.11'
     print(f'Version: {version} for testing{ln()}')
 
     condition_to_restart = False
@@ -33,7 +33,7 @@ def main():
 
     if condition_to_restart:
         get_command_stdout(f'{com_spec}"{sys.executable}" "{sys.argv[0]}"', cmd_decode)
-        exit()
+
 
     if DEBUG:
         print(f'{com_spec}"{venv_activate}" && python "{sys.argv[0]}"')
