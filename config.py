@@ -11,7 +11,7 @@ script_path = os.path.dirname(os.path.realpath(__file__))
 
 
 # info / debug / or empty
-LOGGER_LEVEL = "debug"
+LOGGER_LEVEL = "info"
 LOGGER_DIR = f'{script_path}/Logs/{year}/{month}/{day}'
 LOGGER_FILE = f'{LOGGER_DIR}/Logs_{date}'
 LOGGER_FORMAT = "%(name)s\t%(asctime)s\t%(levelname)s\t%(message)s"
