@@ -31,7 +31,7 @@ Add handling of situations in case the parameter is missing in the ini-file.
 
 ---
 
-**version 1.5.9-1.5.13** *for testing*
+**version 1.5.9-1.5.14** *for testing*
 
 Checking the correct operation of the update script.
 
