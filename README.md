@@ -31,6 +31,14 @@ Add handling of situations in case the parameter is missing in the ini-file.
 
 ---
 
+**version 1.5.9** *for testing*
+
+Checking the correct operation of the update script.
+
+Проверка корректной работы скрипта обновлений.
+
+---
+
 **version 1.5.8** *for testing*
 
 Added script update module via **git**, using `git pool`.
