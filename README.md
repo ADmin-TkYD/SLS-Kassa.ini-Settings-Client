@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.4_**
+**_Current version 1.5.7_**
 
 
 ## ToDo
@@ -13,7 +13,7 @@ Add protection for transmitted data.
 
 Find a problem with POST requests on the server.
 
-
+Add handling of situations in case the parameter is missing in the ini-file.
 
 ---
 
@@ -23,9 +23,29 @@ Find a problem with POST requests on the server.
 
 Найти проблему с POST запросами на сервере.
 
+Добавить обрабатку ситуаций, в случае отстутсвия параметра в ini-файле.
+
 ---
 
 ## ChangeLog
+
+---
+
+**version 1.5.7**
+
+Removed check, when sending confirmation that `is_update == true`, now a message with the result of the script 
+is always sent to the server.
+
+Убрана проверка, при отправке подтверждения, что `is_update == true`, теперь сообщение с результатом работы скрипта 
+отправляется на сервер всегда.
+
+---
+
+**version 1.5.6**
+
+**Debug mode** switched to **info** by default.
+
+**Режим дебага** переключен на **info** по умолчанию.
 
 ---
 

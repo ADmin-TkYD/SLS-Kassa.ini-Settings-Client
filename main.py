@@ -14,7 +14,7 @@ py_logger.debug(f"Loading module {__name__}...")
 
 
 def main():
-    version = '1.5.6'
+    version = '1.5.7'
     print(f'Version: {version}{ln()}')
 
     # adding to autostart at user login
@@ -70,30 +70,30 @@ def main():
     data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
     is_update = data_ini_conf.set_params(ini_section, req_data)
 
-    if is_update:
-        try:
-            req_data = srv_request(
-                {
-                    'city': identity_pc.city_abbr,
-                    'name': hash_hostname.MD5,
-                    'mac': hash_mac.MD5,
-                    'version': version,
-                    'update': is_update,
-                }
-            )
-        except CantGetJsonFromServer:
-            py_logger.error("CantGetJsonFromServer")
-            exit(f"Не удалось получить корректные данные от сервера, при запросе данных для: "
-                 f"{{"
-                 f"'city': {identity_pc.city_abbr}, "
-                 f"'name': {hash_hostname.MD5}, "
-                 f"'mac': {hash_mac.MD5}, "
-                 f"'version': {version}, "
-                 f"'update': {is_update}, "                    
-                 f"}}")
 
-        if DEBUG:
-            print(f"Update config: {is_update}{ln()}")
+    try:
+        req_data = srv_request(
+            {
+                'city': identity_pc.city_abbr,
+                'name': hash_hostname.MD5,
+                'mac': hash_mac.MD5,
+                'version': version,
+                'update': is_update,
+            }
+        )
+    except CantGetJsonFromServer:
+        py_logger.error("CantGetJsonFromServer")
+        exit(f"Не удалось получить корректные данные от сервера, при запросе данных для: "
+             f"{{"
+             f"'city': {identity_pc.city_abbr}, "
+             f"'name': {hash_hostname.MD5}, "
+             f"'mac': {hash_mac.MD5}, "
+             f"'version': {version}, "
+             f"'update': {is_update}, "
+             f"}}")
+
+    if DEBUG:
+        print(f"Update config: {is_update}{ln()}")
 
 
 if __name__ == '__main__':
