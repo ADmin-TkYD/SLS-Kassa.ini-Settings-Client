@@ -13,7 +13,7 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8') -> str:
     stderr = process.stderr.read().decode(stdout_decode).strip()
     exitcode = process.returncode
 
-    if not stderr:
+    if not exitcode:
         if DEBUG:
             print(f'stdout: {stdout}{ln()}')
 
