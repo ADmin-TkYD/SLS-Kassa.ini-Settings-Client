@@ -16,7 +16,7 @@ py_logger.debug(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.8'
+    version = '1.5.9'
     print(f'Version: {version}{ln()}')
 
     condition_to_restart = False
