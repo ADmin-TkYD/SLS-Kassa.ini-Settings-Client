@@ -14,18 +14,14 @@ py_logger.debug(f"Loading module {__name__}...")
 
 
 def main():
-    version = '1.5.6'
+    version = '1.5.7'
     print(f'Version: {version}{ln()}')
 
     # adding to autostart at user login
     add_to_registry()
 
     try:
-        if DEBUG:
-            debug_pc_name = 'PRM-01-PC02-Acc'
-            identity_pc = get_identity_pc(debug_pc_name)
-        else:
-            identity_pc = get_identity_pc()
+        identity_pc = get_identity_pc()
         py_logger.debug(f"{identity_pc}")
     except CantGetIdentityPC:
         py_logger.error("CantGetIdentityPC")
@@ -40,9 +36,6 @@ def main():
         print(f"Hash HostName: {hash_hostname.MD5}{ln()}")
 
     pc_mac_address = gma()
-    if DEBUG:
-        pc_mac_address = '74:27:EA:43:9F:84'
-        pc_mac_address = 'AC:22:0B:C5:A2:04'
     hash_mac = GetHash(pc_mac_address.upper())
     if DEBUG:
         print(f"MAC Address: {pc_mac_address}")
