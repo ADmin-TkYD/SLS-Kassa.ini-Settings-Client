@@ -16,8 +16,8 @@ py_logger.debug(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.12'
-    print(f'Version: {version} for testing{ln()}')
+    version = '1.5.13'
+    print(f'Version: {version} for testing!!!{ln()}')
 
     condition_to_restart = False
     already_updated = 'Already up to date.'
