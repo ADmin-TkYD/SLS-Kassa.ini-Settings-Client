@@ -17,7 +17,7 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8') -> str:
 
     if not exitcode:
         if DEBUG:
-            print(f'StdOut:\n{stdout}{ln()}')
+            print(f'Return StdOut:\n{stdout}{ln()}')
 
         return stdout
     else:

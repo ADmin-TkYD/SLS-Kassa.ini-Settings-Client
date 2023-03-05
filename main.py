@@ -16,7 +16,7 @@ py_logger.debug(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.13'
+    version = '1.5.14'
     print(f'Version: {version} for testing!!!{ln()}')
 
     condition_to_restart = False
@@ -32,12 +32,12 @@ def main():
         condition_to_restart = True
 
     if condition_to_restart:
-        get_command_stdout(f'{com_spec}{venv_activate} && python "{sys.argv[0]}"', cmd_decode)
-
+        get_command_stdout(f'{com_spec}{venv_activate} && python {sys.argv[0]}', cmd_decode)
+        exit(f'Close old Version: {version}{ln()}')
 
     if DEBUG:
-        print(f'{com_spec}{venv_activate} && python "{sys.argv[0]}"')
-        print(f'{com_spec}"{sys.executable}" "{sys.argv[0]}"{ln()}')
+        print(f'{com_spec}{venv_activate} && python {sys.argv[0]}')
+        print(f'{com_spec}"{sys.executable}" {sys.argv[0]}{ln()}')
 
     # adding to autostart at user login
     add_to_registry()
