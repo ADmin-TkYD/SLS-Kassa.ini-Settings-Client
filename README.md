@@ -29,6 +29,22 @@ Find a problem with POST requests on the server.
 
 ---
 
+**version 1.5.5**
+
+Fixed error due to interpolation in configparser.
+
+Fixed minor bugs in the code.
+
+The server part has been improved, a table has been added with information 
+about the version and about changing the config on the PC.
+
+Исправлены мелкие ошибки в коде.
+
+Доработана серверная часть, добавлена таблица с информацией о версии и 
+об изменении конфига на ПК.
+
+---
+
 **version 1.5.4**
 
 Fixed error due to interpolation in configparser.

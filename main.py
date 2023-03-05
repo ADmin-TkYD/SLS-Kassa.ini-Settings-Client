@@ -14,7 +14,7 @@ py_logger.debug(f"Loading module {__name__}...")
 
 
 def main():
-    version = '1.5.4'
+    version = '1.5.5'
     print(f'Version: {version}{ln()}')
 
     # adding to autostart at user login
@@ -40,6 +40,7 @@ def main():
     if DEBUG:
         print(f"MAC Address: {pc_mac_address}")
         print(f"Hash MAC Address: {hash_mac.MD5}{ln()}")
+        # print(f"Version: {version}{ln()}")
 
     # ini section name
     ini_section = 'Kassa'
@@ -92,7 +93,7 @@ def main():
                  f"}}")
 
         if DEBUG:
-            print(f"Request from Server: {req_data['DTCLogin']}{ln()}")
+            print(f"Update config: {is_update}{ln()}")
 
 
 if __name__ == '__main__':

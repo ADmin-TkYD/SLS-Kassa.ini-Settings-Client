@@ -10,6 +10,9 @@ def srv_request(payload, headers: dict = {'content-type': 'application/json'}) -
     url = f'{config.SERVER_URL}:{config.SERVER_PORT}{config.SERVER_URI}'
     response = requests.get(url, params=payload, headers=headers)
     if response.status_code == requests.codes.ok:
+        if DEBUG:
+            print(f'Send payload: {payload}{ln()}')
+            print(f'Server response: {response.text}{ln()}')
         try:
             response = response.json()
         except json.decoder.JSONDecodeError:
@@ -20,6 +23,9 @@ def srv_request(payload, headers: dict = {'content-type': 'application/json'}) -
             raise CantGetJsonFromServer
 
         if response['result'].upper() == 'OK':
+            if DEBUG:
+                print(f"JSON: Result: {response['result']}{ln()}")
+
             return response['data']
         else:
             if __name__ == '__main__':
@@ -31,5 +37,29 @@ def srv_request(payload, headers: dict = {'content-type': 'application/json'}) -
 
 # for test this class:
 if __name__ == '__main__':
-    print(
-        f"JSON: {srv_request({'city': 'EKB1', 'name': 'badd1c9b49801ac57e7edc3e0a359a3e', 'mac': '65336ffbf765ee244fff277a7f6f31be'})}")
+    test = {
+        'city': 'EKB',
+        'name': 'badd1c9b49801ac57e7edc3e0a359a3e',
+        'mac': '65336ffbf765ee244fff277a7f6f31be',
+        'version': '0.0.0',
+        'update': False,
+    }
+    print(f"JSON: Data: {srv_request(test)}{ln()}")
+
+    test = {
+        'city': 'EKB',
+        'name': 'badd1c9b49801ac57e7edc3e0a359a3e',
+        'mac': '65336ffbf765ee244fff277a7f6f31be',
+        'version': '0.0.0',
+        'update': True,
+    }
+    print(f"JSON: Data: {srv_request(test)}{ln()}")
+
+    test = {
+        'city': 'EKB',
+        'name': 'badd1c9b49801ac57e7edc3e0a359a3e',
+        'mac': '65336ffbf765ee244fff277a7f6f31be',
+        'version': '0.0.0',
+    }
+    print(f"JSON: Data: {srv_request(test)}{ln()}")
+
