@@ -7,6 +7,8 @@ py_logger.debug(f'Loading module {__name__}...')
 
 
 def get_command_stdout(command: str, stdout_decode: str = 'utf-8') -> str:
+    if DEBUG:
+        print(f'Command: {command}{ln()}')
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
     stdout = process.stdout.read().decode(stdout_decode).strip()
@@ -15,11 +17,11 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8') -> str:
 
     if not exitcode:
         if DEBUG:
-            print(f'stdout: {stdout}{ln()}')
+            print(f'StdOut:\n{stdout}{ln()}')
 
         return stdout
     else:
-        exit(f'stderr: {stderr}\nexitcode: {exitcode}\nstdout: {stdout}{ln()}')
+        exit(f'ExitCode:\n{exitcode}{ln()}StdErr:\n{stderr}{ln()}StdOut:\n{stdout}{ln()}')
 
 
 # for test:
