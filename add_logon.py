@@ -12,13 +12,15 @@ def add_to_registry() -> None:
 
     key = winreg.OpenKey(
         winreg.HKEY_CURRENT_USER,
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+        r'SOFTWARE\Microsoft\Windows\CurrentVersion\Run',
         0,
         winreg.KEY_SET_VALUE)
     winreg.SetValueEx(
         key,
-        "SLS-KassaINI-Updater",
+        'SLS-KassaINI-Updater',
         0,
         winreg.REG_SZ,
-        f'{python_path} "{script_path}\\main.py"')
+        f'{python_path} "{script_path}'
+        r'\main.py"'
+    )
     key.Close()
