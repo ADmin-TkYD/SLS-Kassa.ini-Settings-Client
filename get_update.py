@@ -21,7 +21,7 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8') -> str:
 
         return stdout
     else:
-        exit(f'ExitCode:\n{exitcode}{ln()}StdErr:\n{stderr}{ln()}StdOut:\n{stdout}{ln()}')
+        exit(f'ExitCode:\n{exitcode}{ln()}\nStdErr:\n{stderr}{ln()}\nStdOut:\n{stdout}{ln()}')
 
 
 # for test:
