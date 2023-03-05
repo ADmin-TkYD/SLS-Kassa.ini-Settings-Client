@@ -31,7 +31,7 @@ Add handling of situations in case the parameter is missing in the ini-file.
 
 ---
 
-**version 1.5.16**
+**version 1.5.17**
 
 Fixed minor bugs in the code.
 
