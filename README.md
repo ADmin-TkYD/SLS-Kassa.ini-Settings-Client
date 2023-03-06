@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.20_**
+**_Current version 1.5.21_**
 
 
 ## ToDo
@@ -28,6 +28,16 @@ Add handling of situations in case the parameter is missing in the ini-file.
 ---
 
 ## ChangeLog
+
+---
+
+**version 1.5.21** *(for testing)*
+
+Changed the **get_command_stdout()** function in the **get_update** module, 
+now the function returns errors, not just stdout.
+
+Изменена функция **get_command_stdout()** в модуле **get_update**, теперь 
+функция возвращает ошибки, а не только стдаут.
 
 ---
 
@@ -85,11 +95,11 @@ Added script update module via **git**, using `git pool`.
 
 **version 1.5.7**
 
-Removed check, when sending confirmation that `is_update == true`, now a message with the result of the script 
-is always sent to the server.
+Removed check, when sending confirmation that `is_update == true`, 
+now a message with the result of the script is always sent to the server.
 
-Убрана проверка, при отправке подтверждения, что `is_update == true`, теперь сообщение с результатом работы скрипта 
-отправляется на сервер всегда.
+Убрана проверка, при отправке подтверждения, что `is_update == true`, теперь 
+сообщение с результатом работы скрипта отправляется на сервер всегда.
 
 ---
 
@@ -132,9 +142,11 @@ ValueError: invalid interpolation syntax in "abc%abcabc"`
 
 **version 1.5.3**
 
-Added a check for the identity of the parameters, now the parameters are not overwritten if the data is identical.
+Added a check for the identity of the parameters, now the parameters 
+are not overwritten if the data is identical.
 
-Добавлена проверка на идентичность параметров, теперь параметры не перезаписываются, если данные идентичны.
+Добавлена проверка на идентичность параметров, теперь параметры 
+не перезаписываются, если данные идентичны.
 
 ---
 
