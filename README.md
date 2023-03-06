@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.16_**
+**_Current version 1.5.18_**
 
 
 ## ToDo
@@ -31,7 +31,7 @@ Add handling of situations in case the parameter is missing in the ini-file.
 
 ---
 
-**version 1.5.17**
+**version 1.5.17-1.5.18**
 
 Fixed minor bugs in the code.
 

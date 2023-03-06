@@ -16,7 +16,7 @@ py_logger.debug(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.17'
+    version = '1.5.18'
     print(f'Version: {version}{ln()}')
 
     condition_to_restart = False
@@ -32,7 +32,8 @@ def main():
         condition_to_restart = True
 
     if condition_to_restart:
-        get_command_stdout(f'{com_spec}{venv_activate} && python {sys.argv[0]}', cmd_decode)
+        view_stdout = True
+        get_command_stdout(f'{com_spec}{venv_activate} && python {sys.argv[0]}', cmd_decode, view_stdout)
         exit(f'Close old Version: {version}{ln()}')
 
     if DEBUG:

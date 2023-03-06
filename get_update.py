@@ -6,7 +6,7 @@ from set_logger_settings import *
 py_logger.debug(f'Loading module {__name__}...')
 
 
-def get_command_stdout(command: str, stdout_decode: str = 'utf-8') -> str:
+def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: bool = False) -> str:
     if DEBUG:
         print(f'Command: {command}{ln()}')
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -16,7 +16,7 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8') -> str:
     exitcode = process.returncode
 
     if not exitcode:
-        if DEBUG:
+        if DEBUG or view_stdout:
             print(f'Return StdOut:\n{stdout}{ln()}')
 
         return stdout
