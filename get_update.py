@@ -6,34 +6,34 @@ from set_logger_settings import *
 py_logger.info(f'Loading module {__name__}...')
 
 
-def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: bool = False) -> str:
+def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: bool = False) -> dict:
+    command_result = {}
     py_logger.info(f'Command: {command}; Decode: {stdout_decode}; View: {view_stdout}')
     if DEBUG:
         print(f'Command: {command}{ln()}')
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
-    stdout = process.stdout.read().decode(stdout_decode).strip()
-    stderr = process.stderr.read().decode(stdout_decode).strip()
-    exitcode = process.returncode
+    command_result['StdOut'] = process.stdout.read().decode(stdout_decode).strip()
+    command_result['StdErr'] = process.stderr.read().decode(stdout_decode).strip()
+    command_result['ExitCode'] = process.returncode
 
-    py_logger.info(f'ExitCode: {exitcode}')
-    py_logger.info(f'StdErr: {stderr}')
-    py_logger.info(f'StdOut: {stdout}')
+    py_logger.info(f'Command Result: {command_result}')
 
-    if not exitcode:
-        if DEBUG or view_stdout:
-            print(f'Return StdOut:\n{stdout}{ln()}')
+    if DEBUG or view_stdout:
+        print(f'Return:\n{command_result}{ln()}')
 
-        return stdout
-    else:
-        exit(f'ExitCode:\n{exitcode}{ln()}\nStdErr:\n{stderr}{ln()}\nStdOut:\n{stdout}{ln()}')
+    if command_result['ExitCode']:
+        py_logger.error(f'Command Result Error:\n{command_result}')
+        print(f'Command Result Error:\n{command_result}{ln()}')
+
+    return command_result
 
 
 # for test:
 if __name__ == '__main__':
     condition_to_restart = False
     already_updated = 'Already up to date.'
-    com_spec = 'cmd.exe /c '
+    com_spec = f'cmd.exe /c cd "{config.SCRIPT_PATH}" && '
     venv_activate = r'venv\Scripts\activate'
     cmd_decode = 'cp866'
 

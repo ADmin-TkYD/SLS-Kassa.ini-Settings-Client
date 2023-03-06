@@ -16,7 +16,7 @@ py_logger.info(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.20'
+    version = '1.5.21'
     print(f'Version: {version}{ln()}')
     py_logger.info(f'Version: {version}')
 
@@ -30,7 +30,7 @@ def main():
     print(f'Update status:\n{update_status}{ln()}')
     py_logger.info(f'Update status: {update_status}')
 
-    if update_status != already_updated:
+    if not update_status['ExitCode'] and update_status['StdOut'] != already_updated:
         condition_to_restart = True
         py_logger.info(f'Condition to Restart: {condition_to_restart}')
 
@@ -40,10 +40,6 @@ def main():
         get_command_stdout(f'{com_spec}{venv_activate} && python {sys.argv[0]}', cmd_decode, view_stdout)
         py_logger.info(f'Close old Version: {version}')
         exit(f'Close old Version: {version}{ln()}')
-
-    if DEBUG:
-        print(f'{com_spec}{venv_activate} && python {sys.argv[0]}')
-        print(f'{com_spec}"{sys.executable}" {sys.argv[0]}{ln()}')
 
     # adding to autostart at user login
     add_to_registry()
