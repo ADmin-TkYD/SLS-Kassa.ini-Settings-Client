@@ -37,7 +37,10 @@ def ln() -> str:
 
 
 if config.LOGGER_LEVEL:
+    py_logger.info(f'{"=" * 30}')
+    py_logger.info(f'Loading module {__name__}...')
     py_logger.info(f'Logging level set: {config.LOGGER_LEVEL.upper()}')
     print(f'{ln()}\nLogging level set: {config.LOGGER_LEVEL}{ln()}')
     if DEBUG:
+        py_logger.info(f'Debug Mode is: {DEBUG}')
         print(f'Debug Mode is: {DEBUG}{ln()}')

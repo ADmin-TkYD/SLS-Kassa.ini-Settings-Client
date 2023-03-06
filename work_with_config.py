@@ -2,7 +2,7 @@ import configparser
 from set_logger_settings import *
 
 
-py_logger.debug(f'Loading module {__name__}...')
+py_logger.info(f'Loading module {__name__}...')
 
 
 class ConfigIni:
