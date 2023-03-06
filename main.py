@@ -16,7 +16,7 @@ py_logger.info(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.21'
+    version = '1.5.22'
     print(f'Version: {version}{ln()}')
     py_logger.info(f'Version: {version}')
 
