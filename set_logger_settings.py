@@ -1,4 +1,3 @@
-import config
 import logging
 from create_logging_dir import *
 

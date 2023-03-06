@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.19_**
+**_Current version 1.5.20_**
 
 
 ## ToDo
@@ -31,7 +31,19 @@ Add handling of situations in case the parameter is missing in the ini-file.
 
 ---
 
-**version 1.5.19**
+**version 1.5.20** *(for testing)*
+
+Added transition to script folder.
+
+Optimized code.
+
+Добавлен переход в папку скрипта.
+
+Оптимизирован код.
+
+---
+
+**version 1.5.19** *(for testing)*
 
 Added logging of some modules.
 
@@ -39,9 +51,7 @@ Added logging of some modules.
 
 ---
 
----
-
-**version 1.5.17-1.5.18**
+**version 1.5.17-1.5.18** *(for testing)*
 
 Fixed minor bugs in the code.
 
@@ -49,7 +59,7 @@ Fixed minor bugs in the code.
 
 ---
 
-**version 1.5.15**
+**version 1.5.15** *(for testing)*
 
 Correct operation of the update script.
 
@@ -57,7 +67,7 @@ Correct operation of the update script.
 
 ---
 
-**version 1.5.9-1.5.14** *for testing*
+**version 1.5.9-1.5.14** *(for testing)*
 
 Checking the correct operation of the update script.
 
@@ -65,7 +75,7 @@ Checking the correct operation of the update script.
 
 ---
 
-**version 1.5.8** *for testing*
+**version 1.5.8** *(for testing)*
 
 Added script update module via **git**, using `git pool`.
 
