@@ -16,17 +16,17 @@ py_logger.info(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.19'
+    version = '1.5.20'
     print(f'Version: {version}{ln()}')
     py_logger.info(f'Version: {version}')
 
     condition_to_restart = False
     already_updated = 'Already up to date.'
-    com_spec = 'cmd.exe /c '
+    com_spec = f'cmd.exe /c cd "{config.SCRIPT_PATH}" && '
     venv_activate = r'venv\Scripts\activate'
     cmd_decode = 'cp866'
 
-    update_status = get_command_stdout(com_spec + 'git pull', cmd_decode)
+    update_status = get_command_stdout(f'{com_spec} git pull', cmd_decode)
     print(f'Update status:\n{update_status}{ln()}')
     py_logger.info(f'Update status: {update_status}')
 
