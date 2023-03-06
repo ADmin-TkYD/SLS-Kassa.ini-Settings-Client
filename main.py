@@ -12,12 +12,13 @@ from get_update import get_command_stdout
 from set_logger_settings import *
 
 
-py_logger.debug(f'Loading module {__name__}...')
+py_logger.info(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.18'
+    version = '1.5.19'
     print(f'Version: {version}{ln()}')
+    py_logger.info(f'Version: {version}')
 
     condition_to_restart = False
     already_updated = 'Already up to date.'
@@ -27,13 +28,17 @@ def main():
 
     update_status = get_command_stdout(com_spec + 'git pull', cmd_decode)
     print(f'Update status:\n{update_status}{ln()}')
+    py_logger.info(f'Update status: {update_status}')
 
     if update_status != already_updated:
         condition_to_restart = True
+        py_logger.info(f'Condition to Restart: {condition_to_restart}')
 
     if condition_to_restart:
         view_stdout = True
+        py_logger.info(f'Launching a new version of the script')
         get_command_stdout(f'{com_spec}{venv_activate} && python {sys.argv[0]}', cmd_decode, view_stdout)
+        py_logger.info(f'Close old Version: {version}')
         exit(f'Close old Version: {version}{ln()}')
 
     if DEBUG:
@@ -42,10 +47,11 @@ def main():
 
     # adding to autostart at user login
     add_to_registry()
+    py_logger.info(f'Adding to autostart at user login')
 
     try:
         identity_pc = get_identity_pc()
-        py_logger.debug(f'{identity_pc}')
+        py_logger.info(f'{identity_pc}')
     except CantGetIdentityPC:
         py_logger.error('CantGetIdentityPC')
         exit(f'Не удалось получить корректные идентификационные данные ПК')
@@ -55,11 +61,13 @@ def main():
     print(f'HostName: {identity_pc.pc_name}{ln()}')
 
     hash_hostname = GetHash(identity_pc.pc_name.upper())
+    py_logger.info(f'HostName: {identity_pc.pc_name}; Hash HostName: {hash_hostname.MD5}')
     if DEBUG:
         print(f'Hash HostName: {hash_hostname.MD5}{ln()}')
 
     pc_mac_address = gma()
     hash_mac = GetHash(pc_mac_address.upper())
+    py_logger.info(f'MAC Address: {pc_mac_address}; Hash MAC Address: {hash_mac.MD5}')
     if DEBUG:
         print(f'MAC Address: {pc_mac_address}')
         print(f'Hash MAC Address: {hash_mac.MD5}{ln()}')
@@ -69,14 +77,16 @@ def main():
     ini_section = 'Kassa'
 
     try:
-        req_data = srv_request(
-            {
+        first_send_data = {
                 'city': identity_pc.city_abbr,
                 'name': hash_hostname.MD5,
                 'mac': hash_mac.MD5,
                 'version': version,
             }
-        )
+        first_response_data = srv_request(first_send_data)
+
+        py_logger.info(f'Data sent to the server: {first_send_data}')
+        py_logger.debug(f'Server response: {first_response_data}')
     except CantGetJsonFromServer:
         py_logger.error('CantGetJsonFromServer')
         exit(f'Не удалось получить корректные данные от сервера, при запросе данных для: '
@@ -88,24 +98,28 @@ def main():
              f'}}')
 
     if DEBUG:
-        print(f'Request from Server: {req_data["DTCLogin"]}{ln()}')
+        print(f'Request from Server: {first_response_data["DTCLogin"]}{ln()}')
 
     data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
-    is_update = data_ini_conf.set_params(ini_section, req_data)
+    is_update = data_ini_conf.set_params(ini_section, first_response_data)
+
+    py_logger.info(f'Update config: {is_update}')
 
     if DEBUG:
         print(f'Update config: {is_update}{ln()}')
 
     try:
-        req_data = srv_request(
-            {
+        second_send_data = {
                 'city': identity_pc.city_abbr,
                 'name': hash_hostname.MD5,
                 'mac': hash_mac.MD5,
                 'version': version,
                 'update': is_update,
             }
-        )
+        second_response_data = srv_request(second_send_data)
+
+        py_logger.info(f'Data sent to the server: {second_send_data}')
+        py_logger.debug(f'Server response: {second_response_data}')
     except CantGetJsonFromServer:
         py_logger.error('CantGetJsonFromServer')
         exit(f'Не удалось получить корректные данные от сервера, при запросе данных для: '
@@ -118,6 +132,7 @@ def main():
              f'}}')
 
     if DEBUG:
+        py_logger.info(f'Script execution completed!')
         print(f'Script execution completed!{ln()}')
 
 

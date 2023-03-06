@@ -3,10 +3,11 @@ import subprocess
 from set_logger_settings import *
 
 
-py_logger.debug(f'Loading module {__name__}...')
+py_logger.info(f'Loading module {__name__}...')
 
 
 def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: bool = False) -> str:
+    py_logger.info(f'Command: {command}; Decode: {stdout_decode}; View: {view_stdout}')
     if DEBUG:
         print(f'Command: {command}{ln()}')
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -14,6 +15,10 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: 
     stdout = process.stdout.read().decode(stdout_decode).strip()
     stderr = process.stderr.read().decode(stdout_decode).strip()
     exitcode = process.returncode
+
+    py_logger.info(f'ExitCode: {exitcode}')
+    py_logger.info(f'StdErr: {stderr}')
+    py_logger.info(f'StdOut: {stdout}')
 
     if not exitcode:
         if DEBUG or view_stdout:

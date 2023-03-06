@@ -3,7 +3,7 @@ import json
 from exceptions import CantGetJsonFromServer
 from set_logger_settings import *
 
-py_logger.debug(f'Loading module {__name__}...')
+py_logger.info(f'Loading module {__name__}...')
 
 
 def srv_request(payload: dict, headers: dict = {'content-type': 'application/json'}) -> dict:
