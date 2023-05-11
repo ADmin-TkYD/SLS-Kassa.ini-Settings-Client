@@ -46,6 +46,7 @@ if __name__ == '__main__':
         'mac': '65336ffbf765ee244fff277a7f6f31be',
         'version': '0.0.0',
         'update': False,
+        'test': 'test',
     }
     print(f'JSON: Data: {srv_request(test)}{ln()}')
 
@@ -55,6 +56,7 @@ if __name__ == '__main__':
         'mac': '65336ffbf765ee244fff277a7f6f31be',
         'version': '0.0.0',
         'update': True,
+        'test': 'test',
     }
     print(f"JSON: Data: {srv_request(test)}{ln()}")
 
@@ -63,6 +65,6 @@ if __name__ == '__main__':
         'name': 'badd1c9b49801ac57e7edc3e0a359a3e',
         'mac': '65336ffbf765ee244fff277a7f6f31be',
         'version': '0.0.0',
+        'test': 'test',
     }
     print(f'JSON: Data: {srv_request(test)}{ln()}')
-

@@ -11,6 +11,10 @@ day = f'{datetime.today().day:0{max_number_len}}'
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
+COM_SPEC = f'cmd.exe /c '
+VENC_ACTIVATE = r'venv\Scripts\activate'
+CMD_DECODE = 'cp866'
+
 
 # info / debug / or empty
 LOGGER_LEVEL = 'info'
@@ -26,5 +30,3 @@ SLSKASSA_CONFIG = r'c:\SoftLand Systems\SLS-Kacca\Kassa_W.INI'
 SERVER_URL = 'http://SLS.TkYD.ru'
 SERVER_PORT = 80
 SERVER_URI = '/kassa/settings'
-
-

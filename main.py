@@ -1,4 +1,14 @@
 #!/usr/bin/env python3.11
+__author__ = 'InfSub'
+__contact__ = 'ADmin@TkYD.ru'
+__copyright__ = 'Copyright 2023, [LegioNTeaM]'
+__date__ = '2023/05/11'
+__deprecated__ = False
+__email__ = 'ADmin@TkYD.ru'
+__maintainer__ = 'InfSub'
+__status__ = 'Prodaction'
+__version__ = '1.5.23'
+
 
 import sys
 from identity_pc import get_identity_pc
@@ -16,17 +26,16 @@ py_logger.info(f'Loading module {__name__}...')
 
 
 def main():
-    version = '1.5.22'
+    version = __version__
     print(f'Version: {version}{ln()}')
     py_logger.info(f'Version: {version}')
 
     condition_to_restart = False
     already_updated = 'Already up to date.'
-    com_spec = f'cmd.exe /c cd "{config.SCRIPT_PATH}" && '
-    venv_activate = r'venv\Scripts\activate'
-    cmd_decode = 'cp866'
+    com_spec_command = f'{config.COM_SPEC} cd "{config.SCRIPT_PATH}" && '
 
-    update_status = get_command_stdout(f'{com_spec} git pull', cmd_decode)
+
+    update_status = get_command_stdout(f'{com_spec_command} git pull', config.CMD_DECODE)
     print(f'Update status:\n{update_status}{ln()}')
     py_logger.info(f'Update status: {update_status}')
 
@@ -37,7 +46,7 @@ def main():
     if condition_to_restart:
         view_stdout = True
         py_logger.info(f'Launching a new version of the script')
-        get_command_stdout(f'{com_spec}{venv_activate} && python {sys.argv[0]}', cmd_decode, view_stdout)
+        get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}', config.CMD_DECODE, view_stdout)
         py_logger.info(f'Close old Version: {version}')
         exit(f'Close old Version: {version}{ln()}')
 
