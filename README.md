@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.22_**
+**_Current version 1.5.23_**
 
 
 ## ToDo
@@ -13,8 +13,6 @@ Add protection for transmitted data.
 
 Find a problem with POST requests on the server.
 
-Add handling of situations in case the parameter is missing in the ini-file.
-
 ---
 
 Добавить уведомление в TG об апгреде параметров, если параметры не совпадают.
@@ -23,11 +21,15 @@ Add handling of situations in case the parameter is missing in the ini-file.
 
 Найти проблему с POST запросами на сервере.
 
-Добавить обрабатку ситуаций, в случае отстутсвия параметра в ini-файле.
-
 ---
 
 ## ChangeLog
+
+---
+
+**version 1.5.23**
+
+Fixed error that occurred when adding a non-existent key to the ini file
 
 ---
 
@@ -37,10 +39,10 @@ Add handling of situations in case the parameter is missing in the ini-file.
 
 **version 1.5.21** *(for testing)*
 
-Changed the **get_command_stdout()** function in the **get_update** module, 
+Changed the **get_command_stdout()** function in the **get_update** module,
 now the function returns errors, not just stdout.
 
-Изменена функция **get_command_stdout()** в модуле **get_update**, теперь 
+Изменена функция **get_command_stdout()** в модуле **get_update**, теперь
 функция возвращает ошибки, а не только стдаут.
 
 ---
@@ -99,10 +101,10 @@ Added script update module via **git**, using `git pool`.
 
 **version 1.5.7**
 
-Removed check, when sending confirmation that `is_update == true`, 
+Removed check, when sending confirmation that `is_update == true`,
 now a message with the result of the script is always sent to the server.
 
-Убрана проверка, при отправке подтверждения, что `is_update == true`, теперь 
+Убрана проверка, при отправке подтверждения, что `is_update == true`, теперь
 сообщение с результатом работы скрипта отправляется на сервер всегда.
 
 ---
@@ -121,12 +123,12 @@ Fixed error due to interpolation in configparser.
 
 Fixed minor bugs in the code.
 
-The server part has been improved, a table has been added with information 
+The server part has been improved, a table has been added with information
 about the version and about changing the config on the PC.
 
 Исправлены мелкие ошибки в коде.
 
-Доработана серверная часть, добавлена таблица с информацией о версии и 
+Доработана серверная часть, добавлена таблица с информацией о версии и
 об изменении конфига на ПК.
 
 ---
@@ -135,7 +137,7 @@ about the version and about changing the config on the PC.
 
 Fixed error due to interpolation in configparser.
 
-**Error**: `raise ValueError("invalid interpolation syntax in %r at " 
+**Error**: `raise ValueError("invalid interpolation syntax in %r at "
 ValueError: invalid interpolation syntax in "abc%abcabc"`
 
 **Fixed**: `configparser.ConfigParser(interpolation=None)`
@@ -146,10 +148,10 @@ ValueError: invalid interpolation syntax in "abc%abcabc"`
 
 **version 1.5.3**
 
-Added a check for the identity of the parameters, now the parameters 
+Added a check for the identity of the parameters, now the parameters
 are not overwritten if the data is identical.
 
-Добавлена проверка на идентичность параметров, теперь параметры 
+Добавлена проверка на идентичность параметров, теперь параметры
 не перезаписываются, если данные идентичны.
 
 ---
@@ -164,20 +166,20 @@ Launch mode changed to hidden.
 
 **version 1.5.1**
 
-Fixed problem with script autorun during user authorization, a relative path was specified instead of a full 
+Fixed problem with script autorun during user authorization, a relative path was specified instead of a full
 path to the logs folder, which caused an error if the working folder was not the script folder.
 
-Исправлена проблема с автозапуском скрипта при авторизации пользователя, был указан относительный путь вместо 
+Исправлена проблема с автозапуском скрипта при авторизации пользователя, был указан относительный путь вместо
 полного к папке логов, что вызывало ошибку, если рабочая папка не была папкой скрипта.
 
 ---
 
 **version 1.4.1**
 
-Fixed problem with dataclass(slots=True) in older versions of python for Windows 7, added dataslots() 
+Fixed problem with dataclass(slots=True) in older versions of python for Windows 7, added dataslots()
 for compatibility.
 
-Исправлена проблема с dataclass(slots=True) в старых версиях Python для Windows 7, добавлены dataslots() 
+Исправлена проблема с dataclass(slots=True) в старых версиях Python для Windows 7, добавлены dataslots()
 для совместимости.
 
 ---
