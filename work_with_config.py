@@ -9,26 +9,27 @@ class ConfigIni:
     def __init__(self, cfg_path: str) -> None:
         self._cfg_path = cfg_path
         # обращаемся к конфигу как к обычному словарю!
-        self.Config = configparser.ConfigParser(interpolation=None)
+        self.config = configparser.ConfigParser(interpolation=None)
         # По умолчанию имя преобразуется в нижний регистр, данная настройка оставляет имена как есть
-        self.Config.optionxform = lambda option: option
+        self.config.optionxform = lambda option: option
 
     def get_config(self) -> None:
-        self.Config.read(self._cfg_path)
+        self.config.read(self._cfg_path)
 
     def set_params(self, section: str, params: dict = {}) -> bool:
         change = False
         self.get_config()
-        # self.Config[section] = params
+        # self.config[section] = params
         for key, value in params.items():
-            if self.Config.get(section, key) != value:
-                self.Config.set(section, key, value)
+            # если ключ не существует или значение ключа не равно новому значению
+            if not self.config.has_option(section, key) or self.config.get(section, key) != value:
+                self.config.set(section, key, value)
                 change = True
 
         if change:
             # Сохранияем ini-файл с внесенными изменениями
-            with open(self._cfg_path, 'w') as configFile:  # save
-                self.Config.write(configFile)
+            with open(self._cfg_path, 'w') as config_file:  # save
+                self.config.write(config_file)
 
         print(f'Save the config: {change}{ln()}')
 
@@ -53,7 +54,6 @@ if __name__ == '__main__':
         }
     )
     '''
-    for param_key, param_value in test_conf.Config[ini_section].items():
+    for param_key, param_value in test_conf.config[ini_section].items():
         print(f'{param_key}, {param_value}')
     '''
-

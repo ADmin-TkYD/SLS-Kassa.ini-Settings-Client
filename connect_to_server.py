@@ -68,4 +68,3 @@ if __name__ == '__main__':
         'test': 'test',
     }
     print(f'JSON: Data: {srv_request(test)}{ln()}')
-

@@ -33,16 +33,14 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: 
 if __name__ == '__main__':
     condition_to_restart = False
     already_updated = 'Already up to date.'
-    com_spec = f'cmd.exe /c cd "{config.SCRIPT_PATH}" && '
-    venv_activate = r'venv\Scripts\activate'
-    cmd_decode = 'cp866'
+    com_spec_command = f'{config.COM_SPEC} cd "{config.SCRIPT_PATH}" && '
 
-    if get_command_stdout(com_spec + 'git pull', cmd_decode) != already_updated:
+
+    if get_command_stdout(com_spec_command + 'git pull', config.CMD_DECODE) != already_updated:
         condition_to_restart = True
 
     if condition_to_restart:
-        get_command_stdout(f'{com_spec}{venv_activate} && python main.py', cmd_decode)
+        get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python main.py', config.CMD_DECODE)
 
-    # get_command_stdout(f'{com_spec}{venv_activate} && python {sys.argv[0]}', cmd_decode)
-    print(f'{com_spec}{venv_activate} && python {sys.argv[0]}')
-
+    # get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}', config.CMD_DECODE)
+    print(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}')
