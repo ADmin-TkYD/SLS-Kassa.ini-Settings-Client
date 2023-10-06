@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.23_**
+**_Current version 1.5.25_**
 
 
 ## ToDo
@@ -24,6 +24,18 @@ Find a problem with POST requests on the server.
 ---
 
 ## ChangeLog
+
+---
+
+**version 1.5.25**
+
+Minor fixes
+
+---
+
+**version 1.5.24**
+
+...
 
 ---
 

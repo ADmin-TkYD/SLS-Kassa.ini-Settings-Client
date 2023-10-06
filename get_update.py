@@ -35,7 +35,6 @@ if __name__ == '__main__':
     already_updated = 'Already up to date.'
     com_spec_command = f'{config.COM_SPEC} cd "{config.SCRIPT_PATH}" && '
 
-
     if get_command_stdout(com_spec_command + 'git pull', config.CMD_DECODE) != already_updated:
         condition_to_restart = True
 
