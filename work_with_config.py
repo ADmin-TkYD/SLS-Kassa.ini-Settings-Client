@@ -16,9 +16,13 @@ class ConfigIni:
     def get_config(self) -> None:
         self.config.read(self._cfg_path)
 
-    def set_params(self, section: str, params: dict = {}) -> bool:
+    def set_params(self, section: str, params: dict = None) -> bool:
         change = False
         self.get_config()
+
+        if params is None:
+            params = {}
+
         # self.config[section] = params
         for key, value in params.items():
             # если ключ не существует или значение ключа не равно новому значению

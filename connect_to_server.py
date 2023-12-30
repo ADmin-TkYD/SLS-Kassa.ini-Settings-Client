@@ -6,7 +6,9 @@ from set_logger_settings import *
 py_logger.info(f'Loading module {__name__}...')
 
 
-def srv_request(payload: dict, headers: dict = {'content-type': 'application/json'}) -> dict:
+def srv_request(payload: dict, headers=None) -> dict:
+    if headers is None:
+        headers = {'content-type': 'application/json'}
     url = f'{config.SERVER_URL}:{config.SERVER_PORT}{config.SERVER_URI}'
     response = requests.get(url, params=payload, headers=headers)
     if response.status_code == requests.codes.ok:

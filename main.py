@@ -1,14 +1,13 @@
-#!/usr/bin/env python3.11
+#!/usr/bin/env python3.8
 __author__ = 'InfSub'
 __contact__ = 'ADmin@TkYD.ru'
 __copyright__ = 'Copyright 2023, [LegioNTeaM]'
-__date__ = '2023/05/11'
+__date__ = '2023/12/30'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
-__status__ = 'Prodaction'
-__version__ = '1.5.23'
-
+__status__ = 'Production'
+__version__ = '1.5.26'
 
 import sys
 from identity_pc import get_identity_pc
@@ -20,7 +19,6 @@ from getmac import get_mac_address as gma
 from add_logon import add_to_registry
 from get_update import get_command_stdout
 from set_logger_settings import *
-
 
 py_logger.info(f'Loading module {__name__}...')
 
@@ -34,7 +32,6 @@ def main():
     already_updated = 'Already up to date.'
     com_spec_command = f'{config.COM_SPEC} cd "{config.SCRIPT_PATH}" && '
 
-
     update_status = get_command_stdout(f'{com_spec_command} git pull', config.CMD_DECODE)
     print(f'Update status:\n{update_status}{ln()}')
     py_logger.info(f'Update status: {update_status}')
@@ -46,7 +43,8 @@ def main():
     if condition_to_restart:
         view_stdout = True
         py_logger.info(f'Launching a new version of the script')
-        get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}', config.CMD_DECODE, view_stdout)
+        get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}',
+                           config.CMD_DECODE, view_stdout)
         py_logger.info(f'Close old Version: {version}')
         exit(f'Close old Version: {version}{ln()}')
 
@@ -83,11 +81,11 @@ def main():
 
     try:
         first_send_data = {
-                'city': identity_pc.city_abbr,
-                'name': hash_hostname.MD5,
-                'mac': hash_mac.MD5,
-                'version': version,
-            }
+            'city': identity_pc.city_abbr,
+            'name': hash_hostname.MD5,
+            'mac': hash_mac.MD5,
+            'version': version,
+        }
         first_response_data = srv_request(first_send_data)
 
         py_logger.info(f'Data sent to the server: {first_send_data}')
@@ -115,12 +113,12 @@ def main():
 
     try:
         second_send_data = {
-                'city': identity_pc.city_abbr,
-                'name': hash_hostname.MD5,
-                'mac': hash_mac.MD5,
-                'version': version,
-                'update': is_update,
-            }
+            'city': identity_pc.city_abbr,
+            'name': hash_hostname.MD5,
+            'mac': hash_mac.MD5,
+            'version': version,
+            'update': is_update,
+        }
         second_response_data = srv_request(second_send_data)
 
         py_logger.info(f'Data sent to the server: {second_send_data}')
