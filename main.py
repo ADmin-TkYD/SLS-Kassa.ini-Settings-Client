@@ -2,12 +2,12 @@
 __author__ = 'InfSub'
 __contact__ = 'ADmin@TkYD.ru'
 __copyright__ = 'Copyright 2023, [LegioNTeaM]'
-__date__ = '2023/10/07'
+__date__ = '2023/12/30'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.25'
+__version__ = '1.5.26'
 
 import sys
 from identity_pc import get_identity_pc
