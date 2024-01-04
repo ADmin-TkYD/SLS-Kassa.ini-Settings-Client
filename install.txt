@@ -1,7 +1,7 @@
 PowerShell
 
+winget install --id Git.Git -e --source winget ;
 winget install --id=Python.Python.3.12 -e --source winget ;
-winget install --id Git.Git -e --source winget
 
 
 cmd
@@ -11,11 +11,8 @@ mkdir SLS-Scripts
 cd SLS-Scripts
 git clone https://github.com/ADmin-TkYD/SLS-Kassa.ini-Settings-Client.git
 cd SLS-Kassa.ini-Settings-Client
-python -m venv venv
-
-
-cd "C:\SoftLand Systems\SLS-Scripts\SLS-Kassa.ini-Settings-Client"
 python.exe -m pip install --upgrade pip
+python -m venv venv
 venv\Scripts\activate
 python.exe -m pip install --upgrade pip
 pip install -r requirements.txt

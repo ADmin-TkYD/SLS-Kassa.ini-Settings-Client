@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.27'
+__version__ = '1.5.28'
 
 
 import requests
@@ -30,7 +30,7 @@ def srv_request(payload: dict, headers=None) -> dict:
     if response.status_code == requests.codes.ok:
         py_logger.info(f'Send payload: {payload}')
         py_logger.debug(f'Server response: {response.text}')
-        if DEBUG:
+        if config.DEBUG:
             print(f'Send payload: {payload}{ln()}')
             print(f'Server response: {response.text}{ln()}')
         try:
@@ -44,7 +44,7 @@ def srv_request(payload: dict, headers=None) -> dict:
 
         if response['result'].upper() == 'OK':
             py_logger.info(f'JSON: Result: {response["result"]}')
-            if DEBUG:
+            if config.DEBUG:
                 print(f'JSON: Result: {response["result"]}{ln()}')
 
             return response['data']
