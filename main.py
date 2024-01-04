@@ -1,13 +1,14 @@
 #!/usr/bin/env python3.8
 __author__ = 'InfSub'
 __contact__ = 'ADmin@TkYD.ru'
-__copyright__ = 'Copyright 2023, [LegioNTeaM]'
-__date__ = '2023/12/30'
+__copyright__ = 'Copyright (C) 2023-2024, [LegioNTeaM] InfSub'
+__date__ = '2024/01/04'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.26'
+__version__ = '1.5.27'
+
 
 import sys
 from identity_pc import get_identity_pc
@@ -24,9 +25,11 @@ py_logger.info(f'Loading module {__name__}...')
 
 
 def main():
-    version = __version__
-    print(f'Version: {version}{ln()}')
-    py_logger.info(f'Version: {version}')
+    project_version = __version__
+    project_status = __status__
+
+    print(f'Version: {project_version}{ln()}')
+    py_logger.info(f'Version: {project_version}')
 
     condition_to_restart = False
     already_updated = 'Already up to date.'
@@ -45,15 +48,19 @@ def main():
         py_logger.info(f'Launching a new version of the script')
         get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}',
                            config.CMD_DECODE, view_stdout)
-        py_logger.info(f'Close old Version: {version}')
-        exit(f'Close old Version: {version}{ln()}')
+        py_logger.info(f'Close old Version: {project_version}')
+        exit(f'Close old Version: {project_version}{ln()}')
 
     # adding to autostart at user login
     add_to_registry()
     py_logger.info(f'Adding to autostart at user login')
 
     try:
-        identity_pc = get_identity_pc()
+        if project_status == 'Production':
+            identity_pc = get_identity_pc()
+        else:
+            identity_pc = get_identity_pc('TST-01-PC01-Acc')
+
         py_logger.info(f'{identity_pc}')
     except CantGetIdentityPC:
         py_logger.error('CantGetIdentityPC')
@@ -65,26 +72,26 @@ def main():
 
     hash_hostname = GetHash(identity_pc.pc_name.upper())
     py_logger.info(f'HostName: {identity_pc.pc_name}; Hash HostName: {hash_hostname.MD5}')
-    if DEBUG:
+    if config.DEBUG:
         print(f'Hash HostName: {hash_hostname.MD5}{ln()}')
 
     pc_mac_address = gma()
     hash_mac = GetHash(pc_mac_address.upper())
     py_logger.info(f'MAC Address: {pc_mac_address}; Hash MAC Address: {hash_mac.MD5}')
-    if DEBUG:
+    if config.DEBUG:
         print(f'MAC Address: {pc_mac_address}')
         print(f'Hash MAC Address: {hash_mac.MD5}{ln()}')
-        # print(f'Version: {version}{ln()}')
+        # print(f'Version: {project_version}{ln()}')
 
     # ini section name
-    ini_section = 'Kassa'
+    # ini_section = config.CONFIG_INI_SECTION
 
     try:
         first_send_data = {
             'city': identity_pc.city_abbr,
             'name': hash_hostname.MD5,
             'mac': hash_mac.MD5,
-            'version': version,
+            'version': project_version,
         }
         first_response_data = srv_request(first_send_data)
 
@@ -97,18 +104,18 @@ def main():
              f'city: {identity_pc.city_abbr}, '
              f'name: {hash_hostname.MD5}, '
              f'mac: {hash_mac.MD5}, '
-             f'version: {version}, '
+             f'version: {project_version}, '
              f'}}')
 
-    if DEBUG:
+    if config.DEBUG:
         print(f'Request from Server: {first_response_data["DTCLogin"]}{ln()}')
 
     data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
-    is_update = data_ini_conf.set_params(ini_section, first_response_data)
+    is_update = data_ini_conf.set_params(config.CONFIG_INI_SECTION, first_response_data)
 
     py_logger.info(f'Update config: {is_update}')
 
-    if DEBUG:
+    if config.DEBUG:
         print(f'Update config: {is_update}{ln()}')
 
     try:
@@ -116,7 +123,7 @@ def main():
             'city': identity_pc.city_abbr,
             'name': hash_hostname.MD5,
             'mac': hash_mac.MD5,
-            'version': version,
+            'version': project_version,
             'update': is_update,
         }
         second_response_data = srv_request(second_send_data)
@@ -130,11 +137,11 @@ def main():
              f'city: {identity_pc.city_abbr}, '
              f'name: {hash_hostname.MD5}, '
              f'mac: {hash_mac.MD5}, '
-             f'version: {version}, '
+             f'version: {project_version}, '
              f'update: {is_update}, '
              f'}}')
 
-    if DEBUG:
+    if config.DEBUG:
         py_logger.info(f'Script execution completed!')
         print(f'Script execution completed!{ln()}')
 

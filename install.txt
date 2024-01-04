@@ -1,8 +1,11 @@
-https://www.python.org/ftp/python/3.11.3/python-3.11.3-amd64.exe
+PowerShell
 
+winget install --id=Python.Python.3.12 -e --source winget ;
 winget install --id Git.Git -e --source winget
 
+
 cmd
+
 cd "C:\SoftLand Systems"
 mkdir SLS-Scripts
 cd SLS-Scripts

@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.26_**
+**_Current version 1.5.27_**
 
 
 ## ToDo
@@ -11,7 +11,10 @@ Add notification to TG about parameter upgrade if parameters do not match.
 
 Add protection for transmitted data.
 
-Find a problem with POST requests on the server.
+Find a problem with POST requests on the server (only accepts GET requests)..
+
+Add reading and sending to the server, version of ```Kassa_W.exe``` from the file:
+```C:\SoftLand Systems\SLS-Shared\SLS-Versions\Kassa_W.VER```
 
 ---
 
@@ -19,7 +22,36 @@ Find a problem with POST requests on the server.
 
 Добавить защиту передаваемых данных.
 
-Найти проблему с POST запросами на сервере.
+Найти проблему с POST запросами на сервере (принимает только GET-запросы).
+
+Добавить чтение и отправку на сервер, версии ```Kassa_W.exe``` из файла: 
+```C:\SoftLand Systems\SLS-Shared\SLS-Versions\Kassa_W.VER```
+
+---
+## Installation
+
+**PowerShell** *(Windows 10 and later)*:
+```
+winget install --id Git.Git -e --source winget ; 
+winget install --id=Python.Python.3.12 -e --source winget ;
+```
+
+**cmd:**
+
+```
+cd "C:\SoftLand Systems"
+mkdir SLS-Scripts
+cd SLS-Scripts
+git clone https://github.com/ADmin-TkYD/SLS-Kassa.ini-Settings-Client.git
+cd SLS-Kassa.ini-Settings-Client
+python.exe -m pip install --upgrade pip
+python -m venv venv
+venv\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install -r requirements.txt
+
+python main.py
+```
 
 ---
 
@@ -27,35 +59,51 @@ Find a problem with POST requests on the server.
 
 ---
 
-**version 1.5.26**
+#### version 1.5.27
 
 Minor fixes
 
+Мелкие исправления
+
 ---
 
-**version 1.5.25**
+#### version 1.5.26
 
 Minor fixes
 
+Мелкие исправления
+
 ---
 
-**version 1.5.24**
+#### version 1.5.25 
 
 Minor fixes
 
+Мелкие исправления
+
 ---
 
-**version 1.5.23**
+#### version 1.5.24
+
+Minor fixes
+
+Мелкие исправления
+
+---
+
+#### version 1.5.23
 
 Fixed error that occurred when adding a non-existent key to the ini file
 
----
-
-**version 1.5.22**
+Исправлена ошибка, возникавшая при добавлении несуществующего ключа в ini-файл.
 
 ---
 
-**version 1.5.21** *(for testing)*
+#### version 1.5.22
+
+---
+
+#### version 1.5.21 *(for testing)*
 
 Changed the **get_command_stdout()** function in the **get_update** module,
 now the function returns errors, not just stdout.
@@ -65,7 +113,7 @@ now the function returns errors, not just stdout.
 
 ---
 
-**version 1.5.20** *(for testing)*
+#### version 1.5.20 *(for testing)*
 
 Added transition to script folder.
 
@@ -77,7 +125,7 @@ Optimized code.
 
 ---
 
-**version 1.5.19** *(for testing)*
+#### version 1.5.19 *(for testing)*
 
 Added logging of some modules.
 
@@ -85,7 +133,7 @@ Added logging of some modules.
 
 ---
 
-**version 1.5.17-1.5.18** *(for testing)*
+#### version 1.5.17-1.5.18 *(for testing)*
 
 Fixed minor bugs in the code.
 
@@ -93,7 +141,7 @@ Fixed minor bugs in the code.
 
 ---
 
-**version 1.5.15** *(for testing)*
+#### version 1.5.15 *(for testing)*
 
 Correct operation of the update script.
 
@@ -101,7 +149,7 @@ Correct operation of the update script.
 
 ---
 
-**version 1.5.9-1.5.14** *(for testing)*
+#### version 1.5.9-1.5.14 *(for testing)*
 
 Checking the correct operation of the update script.
 
@@ -109,7 +157,7 @@ Checking the correct operation of the update script.
 
 ---
 
-**version 1.5.8** *(for testing)*
+#### version 1.5.8 *(for testing)*
 
 Added script update module via **git**, using `git pool`.
 
@@ -117,7 +165,7 @@ Added script update module via **git**, using `git pool`.
 
 ---
 
-**version 1.5.7**
+#### version 1.5.7
 
 Removed check, when sending confirmation that `is_update == true`,
 now a message with the result of the script is always sent to the server.
@@ -127,7 +175,7 @@ now a message with the result of the script is always sent to the server.
 
 ---
 
-**version 1.5.6**
+#### version 1.5.6
 
 **Debug mode** switched to **info** by default.
 
@@ -135,7 +183,7 @@ now a message with the result of the script is always sent to the server.
 
 ---
 
-**version 1.5.5**
+#### version 1.5.5
 
 Fixed error due to interpolation in configparser.
 
@@ -151,7 +199,7 @@ about the version and about changing the config on the PC.
 
 ---
 
-**version 1.5.4**
+#### version 1.5.4
 
 Fixed error due to interpolation in configparser.
 
@@ -164,7 +212,7 @@ ValueError: invalid interpolation syntax in "abc%abcabc"`
 
 ---
 
-**version 1.5.3**
+#### version 1.5.3
 
 Added a check for the identity of the parameters, now the parameters
 are not overwritten if the data is identical.
@@ -174,7 +222,7 @@ are not overwritten if the data is identical.
 
 ---
 
-**version 1.5.2**
+#### version 1.5.2
 
 Launch mode changed to hidden.
 
@@ -182,7 +230,7 @@ Launch mode changed to hidden.
 
 ---
 
-**version 1.5.1**
+#### version 1.5.1
 
 Fixed problem with script autorun during user authorization, a relative path was specified instead of a full
 path to the logs folder, which caused an error if the working folder was not the script folder.
@@ -192,7 +240,7 @@ path to the logs folder, which caused an error if the working folder was not the
 
 ---
 
-**version 1.4.1**
+#### version 1.4.1
 
 Fixed problem with dataclass(slots=True) in older versions of python for Windows 7, added dataslots()
 for compatibility.
@@ -202,7 +250,7 @@ for compatibility.
 
 ---
 
-**version 1.3.0**
+#### version 1.3.0
 
 Fixed problem with JSON errors in situations where JSON is not correct or the site did not return anything.
 

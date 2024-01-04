@@ -1,3 +1,15 @@
+#!/usr/bin/env python3.8
+__author__ = 'InfSub'
+__contact__ = 'ADmin@TkYD.ru'
+__copyright__ = 'Copyright (C) 2023-2024, [LegioNTeaM] InfSub'
+__date__ = '2024/01/04'
+__deprecated__ = False
+__email__ = 'ADmin@TkYD.ru'
+__maintainer__ = 'InfSub'
+__status__ = 'Production'
+__version__ = '1.5.27'
+
+
 import os
 from datetime import datetime
 
@@ -15,6 +27,7 @@ COM_SPEC = f'cmd.exe /c '
 VENC_ACTIVATE = r'venv\Scripts\activate'
 CMD_DECODE = 'cp866'
 
+DEBUG = None
 
 # info / debug / or empty
 LOGGER_LEVEL = 'info'
@@ -26,6 +39,7 @@ REGISTRY_PATH = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
 REGISTRY_KEY = 'SLS-KassaINI-Updater'
 
 SLSKASSA_CONFIG = r'c:\SoftLand Systems\SLS-Kacca\Kassa_W.INI'
+CONFIG_INI_SECTION = 'Kassa'
 
 SERVER_URL = 'http://SLS.TkYD.ru'
 SERVER_PORT = 80

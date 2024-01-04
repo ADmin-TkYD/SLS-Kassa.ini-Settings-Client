@@ -1,3 +1,15 @@
+#!/usr/bin/env python3.8
+__author__ = 'InfSub'
+__contact__ = 'ADmin@TkYD.ru'
+__copyright__ = 'Copyright (C) 2023-2024, [LegioNTeaM] InfSub'
+__date__ = '2024/01/04'
+__deprecated__ = False
+__email__ = 'ADmin@TkYD.ru'
+__maintainer__ = 'InfSub'
+__status__ = 'Production'
+__version__ = '1.5.27'
+
+
 import sys
 import winreg
 from set_logger_settings import *
@@ -11,7 +23,7 @@ def add_to_registry() -> None:
     # hide mode
     python_path = python_path.replace('python.exe', 'pythonw.exe')
 
-    if DEBUG:
+    if config.DEBUG:
         print(f'Python path: {python_path}')
         print(f'Script path: {config.SCRIPT_PATH}{ln()}')
 
