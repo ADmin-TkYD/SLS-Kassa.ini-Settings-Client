@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.27'
+__version__ = '1.5.28'
 
 
 import hashlib

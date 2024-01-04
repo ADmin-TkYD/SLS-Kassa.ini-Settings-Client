@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.27_**
+**_Current version 1.5.28_**
 
 
 ## ToDo
@@ -56,6 +56,14 @@ python main.py
 ---
 
 ## ChangeLog
+
+---
+
+#### version 1.5.28
+
+Minor fixes
+
+Мелкие исправления
 
 ---
 
