@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.28'
+__version__ = '1.5.29'
 
 
 import sys
@@ -47,11 +47,13 @@ if __name__ == '__main__':
     already_updated = 'Already up to date.'
     com_spec_command = f'{config.COM_SPEC} cd "{config.SCRIPT_PATH}" && '
 
-    if get_command_stdout(com_spec_command + 'git pull', config.CMD_DECODE) != already_updated:
+    if get_command_stdout(command=com_spec_command + 'git pull', stdout_decode=config.CMD_DECODE) != already_updated:
         condition_to_restart = True
 
     if condition_to_restart:
-        get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python main.py', config.CMD_DECODE)
+        # get_command_stdout(
+        #     command=f'{com_spec_command}{config.VENV_ACTIVATE} && python main.py', stdout_decode=config.CMD_DECODE)
+        get_command_stdout(command=f'{com_spec_command}{config.VENV_ACTIVATE} && python main.py')
 
-    # get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}', config.CMD_DECODE)
-    print(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}')
+    # get_command_stdout(f'{com_spec_command}{config.VENV_ACTIVATE} && python {sys.argv[0]}', config.CMD_DECODE)
+    print(f'{com_spec_command}{config.VENV_ACTIVATE} && python {sys.argv[0]}')
