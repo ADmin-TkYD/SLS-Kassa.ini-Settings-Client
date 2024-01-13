@@ -6,8 +6,8 @@ __date__ = '2024/01/13'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
-__status__ = 'Production-'
-__version__ = '1.5.33'
+__status__ = 'Production'
+__version__ = '1.5.34'
 
 
 import sys
