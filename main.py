@@ -2,15 +2,16 @@
 __author__ = 'InfSub'
 __contact__ = 'ADmin@TkYD.ru'
 __copyright__ = 'Copyright (C) 2023-2024, [LegioNTeaM] InfSub'
-__date__ = '2024/01/04'
+__date__ = '2024/01/13'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
-__status__ = 'Production'
-__version__ = '1.5.28'
+__status__ = 'Production-'
+__version__ = '1.5.33'
 
 
 import sys
+import time
 from identity_pc import get_identity_pc
 from work_with_config import ConfigIni
 from text_hash import GetHash
@@ -35,9 +36,22 @@ def main():
     already_updated = 'Already up to date.'
     com_spec_command = f'{config.COM_SPEC} cd "{config.SCRIPT_PATH}" && '
 
-    update_status = get_command_stdout(f'{com_spec_command} git pull', config.CMD_DECODE)
-    print(f'Update status:\n{update_status}{ln()}')
-    py_logger.info(f'Update status: {update_status}')
+    update_status = []
+    resolve_host = False
+    attempt = 10
+
+    while not resolve_host:
+        update_status = get_command_stdout(command=f'{com_spec_command} git pull', stdout_decode=config.CMD_DECODE)
+        print(f'Update status:\n{update_status}{ln()}')
+        py_logger.info(f'Update status: {update_status}')
+
+        if update_status['StdErr'].find("Could not resolve host") < 0 or not attempt:
+            resolve_host = True
+        else:
+            if config.DEBUG:
+                print(f'Wait, could not resolve host, attempt: {attempt}')
+            attempt += -1
+            time.sleep(10)
 
     if not update_status['ExitCode'] and update_status['StdOut'] != already_updated:
         condition_to_restart = True
@@ -46,8 +60,11 @@ def main():
     if condition_to_restart:
         view_stdout = True
         py_logger.info(f'Launching a new version of the script')
-        get_command_stdout(f'{com_spec_command}{config.VENC_ACTIVATE} && python {sys.argv[0]}',
-                           config.CMD_DECODE, view_stdout)
+        get_command_stdout(
+            command=f'{com_spec_command}{config.VENV_ACTIVATE} && python {sys.argv[0]}',
+            stdout_decode=config.CMD_DECODE,
+            view_stdout=view_stdout
+        )
         py_logger.info(f'Close old Version: {project_version}')
         exit(f'Close old Version: {project_version}{ln()}')
 
@@ -86,60 +103,66 @@ def main():
     # ini section name
     # ini_section = config.CONFIG_INI_SECTION
 
-    try:
-        first_send_data = {
-            'city': identity_pc.city_abbr,
-            'name': hash_hostname.MD5,
-            'mac': hash_mac.MD5,
-            'version': project_version,
-        }
-        first_response_data = srv_request(first_send_data)
+    send_data = {
+        'city': identity_pc.city_abbr,
+        'shop_number': identity_pc.shop_number,
+        'pc_number': identity_pc.pc_number,
+        'pc_type': identity_pc.pc_type,
+        'name': hash_hostname.MD5,
+        'mac': hash_mac.MD5,
+        'version': project_version,
+        'update': None,
+    }
 
-        py_logger.info(f'Data sent to the server: {first_send_data}')
-        py_logger.debug(f'Server response: {first_response_data}')
-    except CantGetJsonFromServer:
-        py_logger.error('CantGetJsonFromServer')
-        exit(f'Не удалось получить корректные данные от сервера, при запросе данных для: '
-             f'{{'
-             f'city: {identity_pc.city_abbr}, '
-             f'name: {hash_hostname.MD5}, '
-             f'mac: {hash_mac.MD5}, '
-             f'version: {project_version}, '
-             f'}}')
+    for num in range(2):
+        # print(f'{num}: {send_data["update"]}{ln()}')
+        try:
+            response_data = srv_request(send_data)
 
-    if config.DEBUG:
-        print(f'Request from Server: {first_response_data["DTCLogin"]}{ln()}')
+            py_logger.info(f'Data sent to the server: {send_data}')
+            py_logger.debug(f'Server response: {response_data}')
 
-    data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
-    is_update = data_ini_conf.set_params(config.CONFIG_INI_SECTION, first_response_data)
+        except CantGetJsonFromServer:
+            py_logger.error('CantGetJsonFromServer')
+            exit(f'Не удалось получить корректные данные от сервера, при запросе данных для: '
+                 f'{{'
+                 f'city: {send_data["city"]}, '
+                 f'name: {send_data["name"]}, '
+                 f'mac: {send_data["mac"]}, '
+                 f'version: {send_data["version"]}, '
+                 f'update: {send_data["update"]}, '
+                 f'}}')
 
-    py_logger.info(f'Update config: {is_update}')
+        if config.DEBUG:
+            print(f'Request from Server: {response_data["DTCLogin"]}{ln()}')
 
-    if config.DEBUG:
-        print(f'Update config: {is_update}{ln()}')
+        # If num == 0 (first cycle)
+        if not num:
+            data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
+            is_update = data_ini_conf.set_params(section=config.CONFIG_INI_SECTION, params=response_data)
 
-    try:
-        second_send_data = {
-            'city': identity_pc.city_abbr,
-            'name': hash_hostname.MD5,
-            'mac': hash_mac.MD5,
-            'version': project_version,
-            'update': is_update,
-        }
-        second_response_data = srv_request(second_send_data)
+            py_logger.info(f'Update config: {is_update}')
 
-        py_logger.info(f'Data sent to the server: {second_send_data}')
-        py_logger.debug(f'Server response: {second_response_data}')
-    except CantGetJsonFromServer:
-        py_logger.error('CantGetJsonFromServer')
-        exit(f'Не удалось получить корректные данные от сервера, при запросе данных для: '
-             f'{{'
-             f'city: {identity_pc.city_abbr}, '
-             f'name: {hash_hostname.MD5}, '
-             f'mac: {hash_mac.MD5}, '
-             f'version: {project_version}, '
-             f'update: {is_update}, '
-             f'}}')
+            if config.DEBUG:
+                print(f'Update config: {is_update}{ln()}')
+
+            send_data['update'] = is_update
+
+        # try:
+        #     second_response_data = srv_request(send_data)
+        #
+        #     py_logger.info(f'Data sent to the server: {send_data}')
+        #     py_logger.debug(f'Server response: {second_response_data}')
+        # except CantGetJsonFromServer:
+        #     py_logger.error('CantGetJsonFromServer')
+        #     exit(f'Не удалось получить корректные данные от сервера, при запросе данных для: '
+        #          f'{{'
+        #          f'city: {send_data["city"]}, '
+        #          f'name: {send_data["name"]}, '
+        #          f'mac: {send_data["mac"]}, '
+        #          f'version: {send_data["version"]}, '
+        #          f'update: {send_data["update"]}, '
+        #          f'}}')
 
     if config.DEBUG:
         py_logger.info(f'Script execution completed!')
