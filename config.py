@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.36'
+__version__ = '1.5.37'
 
 
 import os
@@ -22,6 +22,7 @@ day = f'{datetime.today().day:0{max_number_len}}'
 
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
+SCRIPT_STATUS = 'Production'
 
 COM_SPEC = f'cmd.exe /c '
 VENV_ACTIVATE = r'venv\Scripts\activate'
