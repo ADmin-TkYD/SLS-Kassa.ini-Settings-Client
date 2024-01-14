@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.36'
+__version__ = '1.5.37'
 
 
 import sys
@@ -19,9 +19,9 @@ py_logger.info(f'Loading module {__name__}...')
 
 
 # get the result of a command from stdout
-def send_cmd_command(command: str, stdout_decode: str = 'utf-8', view_stdout: bool = False) -> dict:
+def send_cmd_command(command: str, stdout_decode: str = 'utf-8') -> dict:
     command_result = {}
-    py_logger.info(f'Command: {command}; Decode: {stdout_decode}; View: {view_stdout}')
+    py_logger.info(f'Command: {command}; Decode: {stdout_decode}')
     if config.DEBUG:
         print(f'Command: {command}{ln()}')
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -32,7 +32,7 @@ def send_cmd_command(command: str, stdout_decode: str = 'utf-8', view_stdout: bo
 
     py_logger.info(f'Command Result: {command_result}')
 
-    if config.DEBUG or view_stdout:
+    if config.DEBUG:
         print(f'Return to DEBUG:\n{command_result}{ln()}')
 
     if command_result['ExitCode']:

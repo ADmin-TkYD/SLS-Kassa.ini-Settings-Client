@@ -37,6 +37,8 @@ class ConfigIni:
 
         # self.config[section] = params
         for key, value in params.items():
+            if config.DEBUG:
+                print(f'{key}: {value}')
             # если ключ не существует или значение ключа не равно новому значению
             if not self.config.has_option(section, key) or self.config.get(section, key) != value:
                 self.config.set(section, key, value)

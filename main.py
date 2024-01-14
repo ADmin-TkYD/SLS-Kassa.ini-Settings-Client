@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.36'
+__version__ = '1.5.37'
 
 
 import sys
@@ -67,8 +67,7 @@ def main():
         py_logger.info(f'Launching a new version of the script')
         send_cmd_command(
             command=f'{com_spec_command}{config.VENV_ACTIVATE} && python {sys.argv[0]}',
-            stdout_decode=config.CMD_DECODE,
-            view_stdout=view_stdout
+            stdout_decode=config.CMD_DECODE
         )
         py_logger.info(f'Close old Version: {project_version}')
         exit(f'Close old Version: {project_version}{ln()}')
@@ -78,7 +77,7 @@ def main():
     py_logger.info(f'Adding to autostart at user login')
 
     try:
-        if project_status == 'Production':
+        if project_status == config.SCRIPT_STATUS:
             identity_pc = get_identity_pc()
         else:
             identity_pc = get_identity_pc('TST-01-PC01-Tst')
@@ -151,8 +150,7 @@ def main():
 
             taskkill_status = send_cmd_command(
                 command=f'{com_taskkill}',
-                stdout_decode=config.CMD_DECODE,
-                view_stdout=view_stdout
+                stdout_decode=config.CMD_DECODE
             )
 
             if not taskkill_status['ExitCode']:
