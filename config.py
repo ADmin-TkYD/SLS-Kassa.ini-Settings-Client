@@ -2,12 +2,12 @@
 __author__ = 'InfSub'
 __contact__ = 'ADmin@TkYD.ru'
 __copyright__ = 'Copyright (C) 2023-2024, [LegioNTeaM] InfSub'
-__date__ = '2024/01/04'
+__date__ = '2024/01/14'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.29'
+__version__ = '1.5.36'
 
 
 import os
@@ -37,6 +37,8 @@ LOGGER_FORMAT = '%(name)s\t%(asctime)s\t%(levelname)s\t%(message)s'
 
 REGISTRY_PATH = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
 REGISTRY_KEY = 'SLS-KassaINI-Updater'
+
+SLSKASSA_EXECUTABLE = 'Kassa_W.exe'
 
 SLSKASSA_CONFIG = r'c:\SoftLand Systems\SLS-Kacca\Kassa_W.INI'
 CONFIG_INI_SECTION = 'Kassa'

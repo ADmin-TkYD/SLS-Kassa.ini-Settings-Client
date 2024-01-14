@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.35_**
+**_Current version 1.5.36_**
 
 
 ## ToDo
@@ -57,6 +57,18 @@ python main.py
 ## ChangeLog
 
 ---
+#### version 1.5.36
+
+Added termination of the cash register program process if it is already running.
+
+Minor fixes.
+
+---
+Добавлено завершение процесса кассовой программы, если она уже запущена.
+
+Мелкие исправления.
+
+---
 #### version 1.5.35
 
 Generating json on the server side: Fixed a bug with json encoding (```$conn->set_charset("utf8");```). 
@@ -83,18 +95,18 @@ Added sending data about the department to which the PC belongs
 ---
 #### version 1.5.34
 
-Added github availability check
+Added github availability check.
 
-Added additional data for sending
+Added additional data for sending.
 
-Optimized code for sending data to the server
+Optimized code for sending data to the server.
 
 ---
-Добавлена проверка доступности github
+Добавлена проверка доступности github.
 
-Добавлены дополнительные данные для отправки
+Добавлены дополнительные данные для отправки.
 
-Оптимизирован код для отправки данных на сервер
+Оптимизирован код для отправки данных на сервер.
 
 ---
 #### version 1.5.29
@@ -102,15 +114,15 @@ Optimized code for sending data to the server
 Minor fixes
 
 ---
-Мелкие исправления
+Мелкие исправления.
 
 ---
 #### version 1.5.28
 
-Minor fixes
+Minor fixes.
 
 ---
-Мелкие исправления
+Мелкие исправления.
 
 ---
 #### version 1.5.27
@@ -118,36 +130,36 @@ Minor fixes
 Minor fixes
 
 ---
-Мелкие исправления
+Мелкие исправления.
 
 ---
 #### version 1.5.26
 
-Minor fixes
+Minor fixes.
 
 ---
-Мелкие исправления
+Мелкие исправления.
 
 ---
 #### version 1.5.25 
 
-Minor fixes
+Minor fixes.
 
 ---
-Мелкие исправления
+Мелкие исправления.
 
 ---
 #### version 1.5.24
 
-Minor fixes
+Minor fixes.
 
 ---
-Мелкие исправления
+Мелкие исправления.
 
 ---
 #### version 1.5.23
 
-Fixed error that occurred when adding a non-existent key to the ini file
+Fixed error that occurred when adding a non-existent key to the ini file.
 
 ---
 Исправлена ошибка, возникавшая при добавлении несуществующего ключа в ini-файл.

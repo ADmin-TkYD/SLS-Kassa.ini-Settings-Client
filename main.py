@@ -6,8 +6,8 @@ __date__ = '2024/01/14'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
-__status__ = 'Production-'
-__version__ = '1.5.35'
+__status__ = 'Production'
+__version__ = '1.5.36'
 
 
 import sys
@@ -19,7 +19,7 @@ from exceptions import CantGetIdentityPC, CantGetJsonFromServer
 from connect_to_server import srv_request
 from getmac import get_mac_address as gma
 from add_logon import add_to_registry
-from get_update import get_command_stdout
+from send_command_to_cmd import send_cmd_command
 from set_logger_settings import *
 
 py_logger.info(f'Loading module {__name__}...')
@@ -41,15 +41,20 @@ def main():
     attempt = 10
 
     while not resolve_host:
-        update_status = get_command_stdout(command=f'{com_spec_command} git pull', stdout_decode=config.CMD_DECODE)
-        print(f'Update status:\n{update_status}{ln()}')
+        update_status = send_cmd_command(
+            command=f'{com_spec_command} git pull',
+            stdout_decode=config.CMD_DECODE
+        )
         py_logger.info(f'Update status: {update_status}')
+
+        print(f'Update status:\n{update_status["StdOut"]}{ln()}')
+        if config.DEBUG:
+            print(f'Update status:\n{update_status["StdErr"]}{ln()}')
 
         if update_status['StdErr'].find("Could not resolve host") < 0 or not attempt:
             resolve_host = True
         else:
-            if config.DEBUG:
-                print(f'Wait, could not resolve host, attempt: {attempt}')
+            print(f'Wait, could not resolve host, attempt: {attempt}')
             attempt += -1
             time.sleep(10)
 
@@ -60,7 +65,7 @@ def main():
     if condition_to_restart:
         view_stdout = True
         py_logger.info(f'Launching a new version of the script')
-        get_command_stdout(
+        send_cmd_command(
             command=f'{com_spec_command}{config.VENV_ACTIVATE} && python {sys.argv[0]}',
             stdout_decode=config.CMD_DECODE,
             view_stdout=view_stdout
@@ -141,6 +146,22 @@ def main():
 
         # If num == 0 (first cycle)
         if not num:
+            com_taskkill = f'{config.COM_SPEC} taskkill /f /im {config.SLSKASSA_EXECUTABLE}'
+            view_stdout = True
+
+            taskkill_status = send_cmd_command(
+                command=f'{com_taskkill}',
+                stdout_decode=config.CMD_DECODE,
+                view_stdout=view_stdout
+            )
+
+            if not taskkill_status['ExitCode']:
+                py_logger.info(f'TaskKill status: {taskkill_status}')
+                print(f'TaskKill status:\n{taskkill_status["StdOut"]}{ln()}')
+
+            if config.DEBUG:
+                print(f'TaskKill status:\n{taskkill_status["StdErr"]}{ln()}')
+
             data_ini_conf = ConfigIni(config.SLSKASSA_CONFIG)
             is_update = data_ini_conf.set_params(section=config.CONFIG_INI_SECTION, params=response_data)
 

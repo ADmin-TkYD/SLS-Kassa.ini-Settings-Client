@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.29'
+__version__ = '1.5.36'
 
 
 import sys
@@ -18,7 +18,8 @@ from set_logger_settings import *
 py_logger.info(f'Loading module {__name__}...')
 
 
-def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: bool = False) -> dict:
+# get the result of a command from stdout
+def send_cmd_command(command: str, stdout_decode: str = 'utf-8', view_stdout: bool = False) -> dict:
     command_result = {}
     py_logger.info(f'Command: {command}; Decode: {stdout_decode}; View: {view_stdout}')
     if config.DEBUG:
@@ -32,11 +33,11 @@ def get_command_stdout(command: str, stdout_decode: str = 'utf-8', view_stdout: 
     py_logger.info(f'Command Result: {command_result}')
 
     if config.DEBUG or view_stdout:
-        print(f'Return:\n{command_result}{ln()}')
+        print(f'Return to DEBUG:\n{command_result}{ln()}')
 
     if command_result['ExitCode']:
         py_logger.error(f'Command Result Error:\n{command_result}')
-        print(f'Command Result Error:\n{command_result}{ln()}')
+        print(f'Command Result Error:\n{command_result["StdErr"]}{ln()}')
 
     return command_result
 
@@ -47,13 +48,13 @@ if __name__ == '__main__':
     already_updated = 'Already up to date.'
     com_spec_command = f'{config.COM_SPEC} cd "{config.SCRIPT_PATH}" && '
 
-    if get_command_stdout(command=com_spec_command + 'git pull', stdout_decode=config.CMD_DECODE) != already_updated:
+    if send_cmd_command(command=com_spec_command + 'git pull', stdout_decode=config.CMD_DECODE) != already_updated:
         condition_to_restart = True
 
     if condition_to_restart:
         # get_command_stdout(
         #     command=f'{com_spec_command}{config.VENV_ACTIVATE} && python main.py', stdout_decode=config.CMD_DECODE)
-        get_command_stdout(command=f'{com_spec_command}{config.VENV_ACTIVATE} && python main.py')
+        send_cmd_command(command=f'{com_spec_command}{config.VENV_ACTIVATE} && python main.py')
 
     # get_command_stdout(f'{com_spec_command}{config.VENV_ACTIVATE} && python {sys.argv[0]}', config.CMD_DECODE)
     print(f'{com_spec_command}{config.VENV_ACTIVATE} && python {sys.argv[0]}')
