@@ -2,12 +2,12 @@
 __author__ = 'InfSub'
 __contact__ = 'ADmin@TkYD.ru'
 __copyright__ = 'Copyright (C) 2023-2024, [LegioNTeaM] InfSub'
-__date__ = '2024/01/13'
+__date__ = '2024/01/14'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
-__status__ = 'Production'
-__version__ = '1.5.34'
+__status__ = 'Production-'
+__version__ = '1.5.35'
 
 
 import sys
@@ -76,7 +76,7 @@ def main():
         if project_status == 'Production':
             identity_pc = get_identity_pc()
         else:
-            identity_pc = get_identity_pc('TST-01-PC01-Acc')
+            identity_pc = get_identity_pc('TST-01-PC01-Tst')
 
         py_logger.info(f'{identity_pc}')
     except CantGetIdentityPC:
@@ -108,11 +108,14 @@ def main():
         'shop_number': identity_pc.shop_number,
         'pc_number': identity_pc.pc_number,
         'pc_type': identity_pc.pc_type,
+        'department_abbr': identity_pc.department_abbr,
         'name': hash_hostname.MD5,
         'mac': hash_mac.MD5,
         'version': project_version,
         'update': None,
     }
+    if config.DEBUG:
+        print(f'{config.SERVER_URL}: {config.SERVER_PORT}{config.SERVER_URI}{send_data}{ln()}')
 
     for num in range(2):
         # print(f'{num}: {send_data["update"]}{ln()}')
