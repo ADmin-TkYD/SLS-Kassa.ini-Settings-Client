@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.34_**
+**_Current version 1.5.35_**
 
 
 ## ToDo
@@ -55,6 +55,30 @@ python main.py
 
 ---
 ## ChangeLog
+
+---
+#### version 1.5.35
+
+Generating json on the server side: Fixed a bug with json encoding (```$conn->set_charset("utf8");```). 
+It is necessary to change the encoding of the entire database from latin1 to utf8.
+
+Fixed a bug on the server with processing data about the type of PC, as the department to which 
+the PC belongs.
+
+Added sending data about the department to which the PC belongs 
+(```'department_abbr': identity_pc.department_abbr```).
+
+---
+Формирование json на стороне сервера: Исправлена ошибка с кодировкой json 
+(```$conn->set_charset("utf8");```). 
+Необходимо сменить кодировку всей базы с latin1 на utf8.
+
+Исправлена ошибка на сервере с обработкой данных о типе ПК, как подразделения, к которому относится ПК.
+
+Добавлена отправка данных о подразделении, к которому относится ПК 
+(```'department_abbr': identity_pc.department_abbr```).
+
+
 
 ---
 #### version 1.5.34
