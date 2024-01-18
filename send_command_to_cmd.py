@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.37'
+__version__ = '1.5.38'
 
 
 import sys
@@ -36,8 +36,8 @@ def send_cmd_command(command: str, stdout_decode: str = 'utf-8') -> dict:
         print(f'Return to DEBUG:\n{command_result}{ln()}')
 
     if command_result['ExitCode']:
-        py_logger.error(f'Command Result Error:\n{command_result}')
-        print(f'Command Result Error:\n{command_result["StdErr"]}{ln()}')
+        py_logger.error(f'Command Exit Code:\n{command_result}')
+        print(f'Command Exit Code:\n{command_result["StdErr"]}{ln()}')
 
     return command_result
 
