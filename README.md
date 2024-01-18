@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.37_**
+**_Current version 1.5.38_**
 
 
 ## ToDo
@@ -32,6 +32,7 @@ Add reading and sending to the server, version of ```Kassa_W.exe``` from the fil
 
 **PowerShell** *(Windows 10 and later)*:
 ```
+[System.Console]::Title = hostname
 winget install --id Git.Git -e --source winget ; 
 winget install --id=Python.Python.3.12 -e --source winget ;
 ```
@@ -39,9 +40,9 @@ winget install --id=Python.Python.3.12 -e --source winget ;
 **cmd:**
 
 ```
-cd "C:\SoftLand Systems"
-mkdir SLS-Scripts
-cd SLS-Scripts
+title %computername%: %username%
+mkdir "C:\SoftLand Systems\SLS-Scripts"
+cd "C:\SoftLand Systems\SLS-Scripts"
 git clone https://github.com/ADmin-TkYD/SLS-Kassa.ini-Settings-Client.git
 cd SLS-Kassa.ini-Settings-Client
 python.exe -m pip install --upgrade pip
@@ -51,12 +52,21 @@ python.exe -m pip install --upgrade pip
 pip install -r requirements.txt
 
 python main.py
+deactivate
 ```
 
 ---
 ## ChangeLog
 
 ---
+#### version 1.5.38
+
+Minor fixes
+
+---
+Мелкие исправления.
+
+
 #### version 1.5.37
 
 Minor fixes
