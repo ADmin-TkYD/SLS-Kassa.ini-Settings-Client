@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.38'
+__version__ = '1.5.39'
 
 
 import sys
@@ -51,7 +51,11 @@ def main():
         if config.DEBUG:
             print(f'Update status:\n{update_status["StdErr"]}{ln()}')
 
-        if update_status['StdErr'].find("Could not resolve host") < 0 or not attempt:
+        if (
+                update_status['StdErr'].find("Could not resolve host") < 0
+                or update_status['StdErr'].find("not a git repository") < 0
+                or not attempt
+        ):
             resolve_host = True
         else:
             print(f'Wait, could not resolve host, attempt: {attempt}')

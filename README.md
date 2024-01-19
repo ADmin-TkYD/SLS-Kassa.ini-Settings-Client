@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.38_**
+**_Current version 1.5.39_**
 
 
 ## ToDo
@@ -59,6 +59,15 @@ deactivate
 ## ChangeLog
 
 ---
+#### version 1.5.39
+
+Error Fix: "fatal: not a git repository (or any of the parent directories)".
+
+---
+Исправление ошибки: "fatal: not a git repository (or any of the parent directories)".
+
+
+
 #### version 1.5.38
 
 Minor fixes
