@@ -1,6 +1,6 @@
 # SLS-Kassa-Settings-Updater
 
-**_Current version 1.5.39_**
+**_Current version 1.5.40_**
 
 
 ## ToDo
@@ -59,6 +59,14 @@ deactivate
 ## ChangeLog
 
 ---
+#### version 1.5.40
+
+Error Fix: "StdErr: Fatal: ..." If there are problems connecting to git.
+
+---
+Исправление ошибок: "StdErr: Fatal: ..." При проблемах с подключением к git.
+
+---
 #### version 1.5.39
 
 Error Fix: "fatal: not a git repository (or any of the parent directories)".
@@ -66,8 +74,7 @@ Error Fix: "fatal: not a git repository (or any of the parent directories)".
 ---
 Исправление ошибки: "fatal: not a git repository (or any of the parent directories)".
 
-
-
+---
 #### version 1.5.38
 
 Minor fixes
@@ -116,8 +123,6 @@ Added sending data about the department to which the PC belongs
 
 Добавлена отправка данных о подразделении, к которому относится ПК 
 (```'department_abbr': identity_pc.department_abbr```).
-
-
 
 ---
 #### version 1.5.34

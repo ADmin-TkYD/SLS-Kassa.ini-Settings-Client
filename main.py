@@ -2,12 +2,12 @@
 __author__ = 'InfSub'
 __contact__ = 'ADmin@TkYD.ru'
 __copyright__ = 'Copyright (C) 2023-2024, [LegioNTeaM] InfSub'
-__date__ = '2024/01/18'
+__date__ = '2024/01/19'
 __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.39'
+__version__ = '1.5.40'
 
 
 import sys
@@ -52,9 +52,7 @@ def main():
             print(f'Update status:\n{update_status["StdErr"]}{ln()}')
 
         if (
-                update_status['StdErr'].find("Could not resolve host") < 0
-                or update_status['StdErr'].find("not a git repository") < 0
-                or not attempt
+                update_status['StdErr'].find("fatal") < 0 or not attempt
         ):
             resolve_host = True
         else:
