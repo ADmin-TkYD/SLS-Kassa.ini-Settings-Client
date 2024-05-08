@@ -7,7 +7,7 @@ __deprecated__ = False
 __email__ = 'ADmin@TkYD.ru'
 __maintainer__ = 'InfSub'
 __status__ = 'Production'
-__version__ = '1.5.40'
+__version__ = '1.5.41'
 
 
 import sys
@@ -142,7 +142,7 @@ def main():
                  f'update: {send_data["update"]}, '
                  f'}}')
 
-        if config.DEBUG:
+        if config.DEBUG and response_data:
             print(f'Request from Server: {response_data["DTCLogin"]}{ln()}')
 
         # If num == 0 (first cycle)
